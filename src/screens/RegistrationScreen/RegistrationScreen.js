@@ -1,23 +1,84 @@
 import React, { useEffect, useState } from 'react'
+import { isEmail } from 'validator';
 import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-
+import { getOneByEmail, registerUser } from '../../services/user.service';
 import styles from './styles';
 
 export default RegistrationScreen = ({ navigation }) => {
-    const [fullName, setFullName] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [phonenumber, setPhonenumber] = useState('25991047');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [isError, setIsError] = useState(true);
+    const [message, setMessage] = useState('');
 
     const onFooterLinkPress = () => {
         navigation.navigate('Login');
     }
 
-    const onRegisterPress = () => {
-        navigation.navigate('Home', {user: {}})
+    const getPayload = () => {
+        return {
+            email,
+            password,
+            firstName,
+            lastName,
+            phonenumber
+        };
     }
 
+    const validatePayload = async () => {
+        const payload = getPayload();
+        if (!isEmail(email)) {
+            setMessage("Make sure that your email is valid.");
+            setIsError(true);
+            return false;
+        }
+        try {
+            const user = await getOneByEmail(email);
+            setMessage("This email is already in use.");
+            setIsError(true);
+            return false;
+        } catch (e) {
+            console.log(e.response.data);
+            console.log('Email is valid.')
+        }
+
+        for (const key in payload) {
+            if (!payload[key]) {
+                setIsError(true);
+                setMessage("Make sure your " + key + " is not empty.")
+                return false;
+            }
+        }
+
+        if (password != confirmPassword) {
+            setMessage("Make sure that your passwords match.");
+            setIsError(true);
+            return false;
+        }
+
+        setMessage("");
+        setIsError(false);
+        return true;
+    }
+
+    useEffect(() => {
+        validatePayload();
+    }, [email, password, confirmPassword, firstName, lastName, phonenumber]);
+
+    const onRegisterPress = () => {
+        const payload = getPayload();
+        registerUser(payload)
+            .then(res => {
+                console.log(res.data);
+                navigation.navigate('Home');
+            }).catch(err => {
+                console.log(err.response.data);
+            })
+    }
     return (
         <View style={styles.container}>
             <KeyboardAwareScrollView
@@ -29,10 +90,19 @@ export default RegistrationScreen = ({ navigation }) => {
                 />
                 <TextInput
                     style={styles.input}
-                    placeholder='Full Name'
+                    placeholder='First name'
                     placeholderTextColor="#aaaaaa"
-                    onChangeText={(text) => setFullName(text)}
-                    value={fullName}
+                    onChangeText={(text) => setFirstName(text)}
+                    value={firstName}
+                    underlineColorAndroid="transparent"
+                    autoCapitalize="none"
+                />
+                <TextInput
+                    style={styles.input}
+                    placeholder='Last name'
+                    placeholderTextColor="#aaaaaa"
+                    onChangeText={(text) => setLastName(text)}
+                    value={lastName}
                     underlineColorAndroid="transparent"
                     autoCapitalize="none"
                 />
@@ -65,6 +135,7 @@ export default RegistrationScreen = ({ navigation }) => {
                     underlineColorAndroid="transparent"
                     autoCapitalize="none"
                 />
+                <Text style={styles.infoMessage}>{message}</Text>
                 <TouchableOpacity
                     style={styles.button}
                     onPress={() => onRegisterPress()}>
@@ -75,5 +146,5 @@ export default RegistrationScreen = ({ navigation }) => {
                 </View>
             </KeyboardAwareScrollView>
         </View>
-    )
+    );
 }
