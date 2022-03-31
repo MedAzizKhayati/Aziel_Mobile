@@ -8,3 +8,9 @@ export const getOneByEmail = async (email: string): Promise<any> => {
 export const registerUser = async (payload: any): Promise<any> => {
     return (await axios.post(baseUrl + '/user', payload)).data;
 }
+
+export const loginUser = async (payload: any): Promise<any> => {
+    let response = (await axios.post(baseUrl + '/user/login', payload));
+    console.log(response);
+    return response.data;
+}

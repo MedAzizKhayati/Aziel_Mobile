@@ -1,18 +1,60 @@
-import React, { useState } from 'react'
-import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { isEmail } from 'class-validator';
+import React, { useEffect, useRef, useState } from 'react';
+import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { loginUser } from '../../services/user.service';
 import styles from './styles';
 
-export default function LoginScreen({navigation}) {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+export default function LoginScreen({ navigation }) {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [isError, setIsError] = useState(true);
+    const [message, setMessage] = useState('');
 
     const onFooterLinkPress = () => {
-        navigation.navigate('Registration')
-    }
+        navigation.navigate('Registration');
+    };
+    const getPayload = () => {
+        return {
+            email,
+            password,
+        };
+    };
+    const validatePayload = async () => {
+        const payload = getPayload();
+        if (!isEmail(email)) {
+            setMessage('Make sure that your email is valid.');
+            setIsError(true);
+            return false;
+        }
+        for (const key in payload) {
+            if (!payload[key]) {
+                setIsError(true);
+                setMessage('Make sure your ' + key + ' is not empty.');
+                return false;
+            }
+        }
+        setMessage('');
+        setIsError(false);
+        return true;
+    };
+    
+    useEffect(() => {
+        validatePayload();
+    }, [email, password]);
 
     const onLoginPress = () => {
-    }
+        const payload = getPayload();
+        if (!isError)
+            loginUser(payload)
+                .then(res => {
+                    console.log(res);
+                    navigation.navigate('Home');
+                })
+                .catch(err => {
+                    console.log(err.response.data);
+                });
+    };
 
     return (
         <View style={styles.container}>
@@ -25,9 +67,9 @@ export default function LoginScreen({navigation}) {
                 />
                 <TextInput
                     style={styles.input}
-                    placeholder='E-mail'
+                    placeholder="E-mail"
                     placeholderTextColor="#aaaaaa"
-                    onChangeText={(text) => setEmail(text)}
+                    onChangeText={text => setEmail(text)}
                     value={email}
                     underlineColorAndroid="transparent"
                     autoCapitalize="none"
@@ -36,21 +78,25 @@ export default function LoginScreen({navigation}) {
                     style={styles.input}
                     placeholderTextColor="#aaaaaa"
                     secureTextEntry
-                    placeholder='Password'
-                    onChangeText={(text) => setPassword(text)}
+                    placeholder="Password"
+                    onChangeText={text => setPassword(text)}
                     value={password}
                     underlineColorAndroid="transparent"
                     autoCapitalize="none"
                 />
-                <TouchableOpacity
-                    style={styles.button}
-                    onPress={() => onLoginPress()}>
+                <Text style={styles.infoMessage}>{message}</Text>
+                <TouchableOpacity style={styles.button} onPress={() => onLoginPress()}>
                     <Text style={styles.buttonTitle}>Log in</Text>
                 </TouchableOpacity>
                 <View style={styles.footerView}>
-                    <Text style={styles.footerText}>Don't have an account? <Text onPress={onFooterLinkPress} style={styles.footerLink}>Sign up</Text></Text>
+                    <Text style={styles.footerText}>
+                        Don't have an account?{' '}
+                        <Text onPress={onFooterLinkPress} style={styles.footerLink}>
+                            Sign up
+                        </Text>
+                    </Text>
                 </View>
             </KeyboardAwareScrollView>
         </View>
-    )
+    );
 }

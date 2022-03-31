@@ -3,16 +3,12 @@ import React, { useEffect, useState } from 'react'
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
-
 // Screens
 import HelloWorld from './src/screens/HelloWorld';
 import WelcomePage from './src/screens/WelcomePage';
 import { LoginScreen, HomeScreen, RegistrationScreen } from './src/screens';
 
-
 const Stack = createNativeStackNavigator();
-
 export default function App() {
 
   const [loading, setLoading] = useState(true)

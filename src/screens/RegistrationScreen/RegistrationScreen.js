@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { isEmail } from 'validator';
 import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -71,13 +71,14 @@ export default RegistrationScreen = ({ navigation }) => {
 
     const onRegisterPress = () => {
         const payload = getPayload();
-        registerUser(payload)
-            .then(res => {
-                console.log(res.data);
-                navigation.navigate('Home');
-            }).catch(err => {
-                console.log(err.response.data);
-            })
+        if (!isError)
+            registerUser(payload)
+                .then(res => {
+                    console.log(res.data);
+                    navigation.navigate('Home');
+                }).catch(err => {
+                    console.log(err.response.data);
+                })
     }
     return (
         <View style={styles.container}>

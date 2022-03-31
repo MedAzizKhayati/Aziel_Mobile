@@ -55,5 +55,10 @@ export default StyleSheet.create({
         color: "#788eec",
         fontWeight: "bold",
         fontSize: 16
+    },
+    infoMessage: {
+        color: "red",
+        marginLeft: 30,
+        marginRight: 30,
     }
 })
