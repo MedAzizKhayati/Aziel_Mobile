@@ -8,7 +8,6 @@ import styles from './styles';
 export default RegistrationScreen = ({ navigation }) => {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
-    const [phonenumber, setPhonenumber] = useState('25991047');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -25,7 +24,6 @@ export default RegistrationScreen = ({ navigation }) => {
             password,
             firstName,
             lastName,
-            phonenumber
         };
     }
 
@@ -67,18 +65,17 @@ export default RegistrationScreen = ({ navigation }) => {
 
     useEffect(() => {
         validatePayload();
-    }, [email, password, confirmPassword, firstName, lastName, phonenumber]);
+    }, [email, password, confirmPassword, firstName, lastName]);
 
     const onRegisterPress = () => {
         const payload = getPayload();
         if (!isError)
             registerUser(payload)
                 .then(res => {
-                    console.log(res.data);
-                    navigation.navigate('Home');
+                    navigation.navigate('Login');
                 }).catch(err => {
                     console.log(err.response.data);
-                })
+                });
     }
     return (
         <View style={styles.container}>

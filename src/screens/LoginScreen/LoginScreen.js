@@ -1,11 +1,12 @@
 import { isEmail } from 'class-validator';
 import React, { useEffect, useRef, useState } from 'react';
-import { Image, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Image, StatusBar, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { loginUser } from '../../services/user.service';
 import styles from './styles';
 
-export default function LoginScreen({ navigation }) {
+
+export default LoginScreen = ({ navigation, user, setUser }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isError, setIsError] = useState(true);
@@ -38,7 +39,7 @@ export default function LoginScreen({ navigation }) {
         setIsError(false);
         return true;
     };
-    
+
     useEffect(() => {
         validatePayload();
     }, [email, password]);
@@ -48,55 +49,58 @@ export default function LoginScreen({ navigation }) {
         if (!isError)
             loginUser(payload)
                 .then(res => {
-                    console.log(res);
-                    navigation.navigate('Home');
+                    setUser(res);
                 })
                 .catch(err => {
-                    console.log(err.response.data);
+                    console.log(err?.response?.data);
                 });
     };
 
     return (
-        <View style={styles.container}>
-            <KeyboardAwareScrollView
-                style={{ flex: 1, width: '100%' }}
-                keyboardShouldPersistTaps="always">
-                <Image
-                    style={styles.logo}
-                    source={require('../../../assets/aziel_logo.png')}
-                />
-                <TextInput
-                    style={styles.input}
-                    placeholder="E-mail"
-                    placeholderTextColor="#aaaaaa"
-                    onChangeText={text => setEmail(text)}
-                    value={email}
-                    underlineColorAndroid="transparent"
-                    autoCapitalize="none"
-                />
-                <TextInput
-                    style={styles.input}
-                    placeholderTextColor="#aaaaaa"
-                    secureTextEntry
-                    placeholder="Password"
-                    onChangeText={text => setPassword(text)}
-                    value={password}
-                    underlineColorAndroid="transparent"
-                    autoCapitalize="none"
-                />
-                <Text style={styles.infoMessage}>{message}</Text>
-                <TouchableOpacity style={styles.button} onPress={() => onLoginPress()}>
-                    <Text style={styles.buttonTitle}>Log in</Text>
-                </TouchableOpacity>
-                <View style={styles.footerView}>
-                    <Text style={styles.footerText}>
-                        Don't have an account?{' '}
-                        <Text onPress={onFooterLinkPress} style={styles.footerLink}>
-                            Sign up
+        <>
+            <StatusBar translucent/>
+            <View style={styles.container}>
+                <KeyboardAwareScrollView
+                    style={{ flex: 1, width: '100%' }}
+                    keyboardShouldPersistTaps="always">
+                    <Image
+                        style={styles.logo}
+                        source={require('../../../assets/aziel_logo.png')}
+                    />
+                    <TextInput
+                        style={styles.input}
+                        placeholder="E-mail"
+                        placeholderTextColor="#aaaaaa"
+                        onChangeText={text => setEmail(text)}
+                        value={email}
+                        underlineColorAndroid="transparent"
+                        autoCapitalize="none"
+                    />
+                    <TextInput
+                        style={styles.input}
+                        placeholderTextColor="#aaaaaa"
+                        secureTextEntry
+                        placeholder="Password"
+                        onChangeText={text => setPassword(text)}
+                        value={password}
+                        underlineColorAndroid="transparent"
+                        autoCapitalize="none"
+                    />
+                    <Text style={styles.infoMessage}>{message}</Text>
+                    <TouchableOpacity style={styles.button} onPress={() => onLoginPress()}>
+                        <Text style={styles.buttonTitle}>Log in</Text>
+                    </TouchableOpacity>
+                    <View style={styles.footerView}>
+                        <Text style={styles.footerText}>
+                            Don't have an account?{' '}
+                            <Text onPress={onFooterLinkPress} style={styles.footerLink}>
+                                Sign up
+                            </Text>
                         </Text>
-                    </Text>
-                </View>
-            </KeyboardAwareScrollView>
-        </View>
+                    </View>
+                </KeyboardAwareScrollView>
+            </View>
+        </>
+
     );
 }
