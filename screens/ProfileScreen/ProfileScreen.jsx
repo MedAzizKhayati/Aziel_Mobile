@@ -8,6 +8,8 @@ import useColorScheme from '../../hooks/useColorScheme';
 
 import styles from './styles';
 
+const getRandomImageURI = () => "https://picsum.photos/" + (Math.random() * (100) + 200).toFixed(0);
+
 const ProfileScreen = ({ navigation }) => {
     const { authState, authDispatch } = useContext(GlobalContext);
     const colorScheme = useColorScheme();
@@ -50,7 +52,7 @@ const ProfileScreen = ({ navigation }) => {
             <View style={[styles.photoContainer, { backgroundColor: Colors[colorScheme].secondaryBackground }]}>
                 <Image
                     style={styles.photo}
-                    source={require('../../assets/images/aziel_logo.png')}
+                    source={{ uri: getRandomImageURI() }}
                 />
                 <FontAwesome
                     size={20}

@@ -2,7 +2,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useColorScheme } from "react-native";
 import Colors from "../constants/Colors";
-import { ProfileScreen, SettingsScreen } from "../screens";
+import { HomeScreen, ProfileScreen, SettingsScreen } from "../screens";
 import ModalScreen from "../screens/ModalScreen";
 
 const BottomTab = createBottomTabNavigator();
@@ -19,7 +19,7 @@ export default () => {
         >
             <BottomTab.Screen
                 name="Home"
-                component={ModalScreen}
+                component={HomeScreen}
                 options={{
                     title: 'Home',
                     tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,

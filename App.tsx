@@ -16,7 +16,10 @@ export default () => {
     return (
       <SafeAreaProvider>
         <GlobalProvider>
-          <Navigation colorScheme={colorScheme} />
+          <>
+            <Navigation colorScheme={colorScheme} />
+            <StatusBar />
+          </>
         </GlobalProvider>
       </SafeAreaProvider>
     );
