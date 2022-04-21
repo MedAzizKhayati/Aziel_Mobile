@@ -12,7 +12,7 @@ const GlobalProvider = ({ children }) => {
         getUserMe()
         .then(user => {
             authDispatch({ type: 'LOGIN', payload: user })
-            console.log(user);
+            console.log("This is the user object", user);
         })
         .catch(err => console.log(err));
     }, [])
