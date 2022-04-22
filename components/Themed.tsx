@@ -54,7 +54,7 @@ export const ScrollView = (props: ViewProps) => {
   return <DefaultScrollView style={[{ backgroundColor }, style]} {...otherProps} />;
 }
 
-export const TextInput = (props: ViewProps) => {
+export const TextInput = (props: TextProps) => {
   const { style, lightColor, darkColor, ...otherProps } = props;
   const backgroundColor = useThemeColor({ light: lightColor, dark: darkColor }, 'secondaryBackground');
   const color = useThemeColor({}, 'text');
