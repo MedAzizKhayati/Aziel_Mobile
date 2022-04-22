@@ -1,3 +1,4 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import { Image } from "react-native";
 
@@ -23,6 +24,7 @@ const ImageWithFallback = ({ source, alt, ...props }: ImageProps) => {
             setImageSrc({ uri: getRandomImageURI() });
         }
     };
+    
     return (
         <Image
             source={imageSrc}

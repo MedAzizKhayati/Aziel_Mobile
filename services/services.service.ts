@@ -15,3 +15,7 @@ export const getServicesByCategory = async (id: string, limit: number = 10, page
 export const getServicesByUser = async (id: string, limit: number = 10, page: number = 1): Promise<any> => {
     return (await axiosInstance.get(`/services/user/${id}/${limit}/${page}`)).data;
 }
+
+export const getServicesByQuery = async (query: string, limit: number = 10, page: number = 1): Promise<any> => {
+    return (await axiosInstance.get(`/services/search/${query}/${limit}/${page}`)).data;
+}

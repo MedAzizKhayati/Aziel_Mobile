@@ -8,7 +8,7 @@ import Colors from '../../constants/Colors';
 import { GlobalContext } from '../../context/Provider';
 import useColorScheme from '../../hooks/useColorScheme';
 import { BASE_URL } from '../../services/api.service';
-import { getAllServices, getPopularServices } from '../../services/services.service';
+import { getPopularServices } from '../../services/services.service';
 import { getAllServiceCategories } from '../../services/service_cateogries.service';
 
 import styles from './styles';
@@ -79,7 +79,11 @@ const HomeScreen = ({ navigation }) => {
   return (
     <ScrollView style={styles?.container}>
       <View style={styles?.searchView}>
-        <TextInput style={styles?.searchInput} placeholder="Tap to search..." />
+        <TextInput 
+          style={styles?.searchInput} 
+          placeholder="Tap to search..."
+          onSubmitEditing={event => navigation.navigate('ServicesScreen', { query: event.nativeEvent.text })}
+        />
       </View>
       <View style={styles?.categoriesContainer}>
         <Text style={styles?.categoriesText}>Categories</Text>

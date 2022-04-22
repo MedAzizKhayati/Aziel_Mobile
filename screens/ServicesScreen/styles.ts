@@ -20,6 +20,11 @@ const styles = StyleSheet.create({
         width: '100%',
         paddingBottom: 100,
     },
+    emptyText: {
+        fontSize: 20,
+        textAlign: 'center',
+        marginTop: 20,
+    }
 })
 
 export default styles;
