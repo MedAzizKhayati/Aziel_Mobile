@@ -1,7 +1,7 @@
 import { TokenRefreshRequest, applyAuthTokenInterceptor, setAuthTokens } from 'react-native-axios-jwt';
 import axios from 'axios'
 
-export const BASE_URL: string = "http://192.168.1.13:3000";
+export const BASE_URL: string = "http://192.168.127.97:3000";
 
 export const axiosInstance = axios.create({ baseURL: BASE_URL });
 
