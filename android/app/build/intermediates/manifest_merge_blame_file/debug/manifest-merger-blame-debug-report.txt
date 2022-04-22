@@ -1,0 +1,151 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.aziel"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="21"
+9        android:targetSdkVersion="30" />
+10
+11    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+11-->C:\Users\bouha\OneDrive\Desktop\Aziel\Aziel_Mobile\android\app\src\debug\AndroidManifest.xml:5:5-77
+11-->C:\Users\bouha\OneDrive\Desktop\Aziel\Aziel_Mobile\android\app\src\debug\AndroidManifest.xml:5:22-75
+12    <uses-permission android:name="android.permission.INTERNET" />
+12-->C:\Users\bouha\OneDrive\Desktop\Aziel\Aziel_Mobile\android\app\src\main\AndroidManifest.xml:4:5-67
+12-->C:\Users\bouha\OneDrive\Desktop\Aziel\Aziel_Mobile\android\app\src\main\AndroidManifest.xml:4:22-64
+13    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+13-->[com.facebook.flipper:flipper:0.99.0] C:\Users\bouha\.gradle\caches\transforms-3\b4bb08ed014de24ba4ea51cfdac8a107\transformed\jetified-flipper-0.99.0\AndroidManifest.xml:16:5-76
+13-->[com.facebook.flipper:flipper:0.99.0] C:\Users\bouha\.gradle\caches\transforms-3\b4bb08ed014de24ba4ea51cfdac8a107\transformed\jetified-flipper-0.99.0\AndroidManifest.xml:16:22-73
+14    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+14-->[com.google.android.gms:play-services-measurement-api:20.1.0] C:\Users\bouha\.gradle\caches\transforms-3\afb63b9f168a583c9a9f9a277041b7bd\transformed\jetified-play-services-measurement-api-20.1.0\AndroidManifest.xml:23:5-79
+14-->[com.google.android.gms:play-services-measurement-api:20.1.0] C:\Users\bouha\.gradle\caches\transforms-3\afb63b9f168a583c9a9f9a277041b7bd\transformed\jetified-play-services-measurement-api-20.1.0\AndroidManifest.xml:23:22-76
+15    <uses-permission android:name="android.permission.WAKE_LOCK" />
+15-->[com.google.android.gms:play-services-measurement-api:20.1.0] C:\Users\bouha\.gradle\caches\transforms-3\afb63b9f168a583c9a9f9a277041b7bd\transformed\jetified-play-services-measurement-api-20.1.0\AndroidManifest.xml:24:5-68
+15-->[com.google.android.gms:play-services-measurement-api:20.1.0] C:\Users\bouha\.gradle\caches\transforms-3\afb63b9f168a583c9a9f9a277041b7bd\transformed\jetified-play-services-measurement-api-20.1.0\AndroidManifest.xml:24:22-65
+16    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" /> <!-- Include required permissions for Advertising Id -->
+16-->[com.google.android.gms:play-services-measurement:20.1.0] C:\Users\bouha\.gradle\caches\transforms-3\5ab524f657d6af080227c355184e6c58\transformed\jetified-play-services-measurement-20.1.0\AndroidManifest.xml:26:5-110
+16-->[com.google.android.gms:play-services-measurement:20.1.0] C:\Users\bouha\.gradle\caches\transforms-3\5ab524f657d6af080227c355184e6c58\transformed\jetified-play-services-measurement-20.1.0\AndroidManifest.xml:26:22-107
+17    <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
+17-->[com.google.android.gms:play-services-ads-identifier:18.0.0] C:\Users\bouha\.gradle\caches\transforms-3\e9f84eb09d84ca9ed16f1ad331b7e074\transformed\jetified-play-services-ads-identifier-18.0.0\AndroidManifest.xml:23:5-79
+17-->[com.google.android.gms:play-services-ads-identifier:18.0.0] C:\Users\bouha\.gradle\caches\transforms-3\e9f84eb09d84ca9ed16f1ad331b7e074\transformed\jetified-play-services-ads-identifier-18.0.0\AndroidManifest.xml:23:22-76
+18
+19    <application
+19-->C:\Users\bouha\OneDrive\Desktop\Aziel\Aziel_Mobile\android\app\src\main\AndroidManifest.xml:6:5-24:19
+20        android:name="com.aziel.MainApplication"
+20-->C:\Users\bouha\OneDrive\Desktop\Aziel\Aziel_Mobile\android\app\src\main\AndroidManifest.xml:7:7-38
+21        android:allowBackup="false"
+21-->C:\Users\bouha\OneDrive\Desktop\Aziel\Aziel_Mobile\android\app\src\main\AndroidManifest.xml:11:7-34
+22        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+22-->[androidx.core:core:1.6.0] C:\Users\bouha\.gradle\caches\transforms-3\64a9063406808f30fdf55983aa926644\transformed\core-1.6.0\AndroidManifest.xml:24:18-86
+23        android:debuggable="true"
+24        android:icon="@mipmap/ic_launcher"
+24-->C:\Users\bouha\OneDrive\Desktop\Aziel\Aziel_Mobile\android\app\src\main\AndroidManifest.xml:9:7-41
+25        android:label="@string/app_name"
+25-->C:\Users\bouha\OneDrive\Desktop\Aziel\Aziel_Mobile\android\app\src\main\AndroidManifest.xml:8:7-39
+26        android:roundIcon="@mipmap/ic_launcher_round"
+26-->C:\Users\bouha\OneDrive\Desktop\Aziel\Aziel_Mobile\android\app\src\main\AndroidManifest.xml:10:7-52
+27        android:theme="@style/AppTheme"
+27-->C:\Users\bouha\OneDrive\Desktop\Aziel\Aziel_Mobile\android\app\src\main\AndroidManifest.xml:12:7-38
+28        android:usesCleartextTraffic="true" >
+28-->C:\Users\bouha\OneDrive\Desktop\Aziel\Aziel_Mobile\android\app\src\debug\AndroidManifest.xml:8:9-44
+29        <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
+29-->C:\Users\bouha\OneDrive\Desktop\Aziel\Aziel_Mobile\android\app\src\debug\AndroidManifest.xml:11:9-86
+29-->C:\Users\bouha\OneDrive\Desktop\Aziel\Aziel_Mobile\android\app\src\debug\AndroidManifest.xml:11:19-83
+30        <activity
+30-->C:\Users\bouha\OneDrive\Desktop\Aziel\Aziel_Mobile\android\app\src\main\AndroidManifest.xml:13:7-23:18
+31            android:name="com.aziel.MainActivity"
+31-->C:\Users\bouha\OneDrive\Desktop\Aziel\Aziel_Mobile\android\app\src\main\AndroidManifest.xml:14:9-37
+32            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
+32-->C:\Users\bouha\OneDrive\Desktop\Aziel\Aziel_Mobile\android\app\src\main\AndroidManifest.xml:16:9-86
+33            android:label="@string/app_name"
+33-->C:\Users\bouha\OneDrive\Desktop\Aziel\Aziel_Mobile\android\app\src\main\AndroidManifest.xml:15:9-41
+34            android:launchMode="singleTask"
+34-->C:\Users\bouha\OneDrive\Desktop\Aziel\Aziel_Mobile\android\app\src\main\AndroidManifest.xml:17:9-40
+35            android:windowSoftInputMode="adjustResize" >
+35-->C:\Users\bouha\OneDrive\Desktop\Aziel\Aziel_Mobile\android\app\src\main\AndroidManifest.xml:18:9-51
+36            <intent-filter>
+36-->C:\Users\bouha\OneDrive\Desktop\Aziel\Aziel_Mobile\android\app\src\main\AndroidManifest.xml:19:9-22:25
+37                <action android:name="android.intent.action.MAIN" />
+37-->C:\Users\bouha\OneDrive\Desktop\Aziel\Aziel_Mobile\android\app\src\main\AndroidManifest.xml:20:13-65
+37-->C:\Users\bouha\OneDrive\Desktop\Aziel\Aziel_Mobile\android\app\src\main\AndroidManifest.xml:20:21-62
+38
+39                <category android:name="android.intent.category.LAUNCHER" />
+39-->C:\Users\bouha\OneDrive\Desktop\Aziel\Aziel_Mobile\android\app\src\main\AndroidManifest.xml:21:13-73
+39-->C:\Users\bouha\OneDrive\Desktop\Aziel\Aziel_Mobile\android\app\src\main\AndroidManifest.xml:21:23-70
+40            </intent-filter>
+41        </activity>
+42
+43        <service
+43-->[com.google.android.gms:play-services-measurement-api:20.1.0] C:\Users\bouha\.gradle\caches\transforms-3\afb63b9f168a583c9a9f9a277041b7bd\transformed\jetified-play-services-measurement-api-20.1.0\AndroidManifest.xml:27:9-33:19
+44            android:name="com.google.firebase.components.ComponentDiscoveryService"
+44-->[com.google.android.gms:play-services-measurement-api:20.1.0] C:\Users\bouha\.gradle\caches\transforms-3\afb63b9f168a583c9a9f9a277041b7bd\transformed\jetified-play-services-measurement-api-20.1.0\AndroidManifest.xml:28:13-84
+45            android:directBootAware="true"
+45-->[com.google.firebase:firebase-common:20.1.0] C:\Users\bouha\.gradle\caches\transforms-3\beb1673982e62b10f2205fdbf01e0cbf\transformed\jetified-firebase-common-20.1.0\AndroidManifest.xml:35:13-43
+46            android:exported="false" >
+46-->[com.google.android.gms:play-services-measurement-api:20.1.0] C:\Users\bouha\.gradle\caches\transforms-3\afb63b9f168a583c9a9f9a277041b7bd\transformed\jetified-play-services-measurement-api-20.1.0\AndroidManifest.xml:29:13-37
+47            <meta-data
+47-->[com.google.android.gms:play-services-measurement-api:20.1.0] C:\Users\bouha\.gradle\caches\transforms-3\afb63b9f168a583c9a9f9a277041b7bd\transformed\jetified-play-services-measurement-api-20.1.0\AndroidManifest.xml:30:13-32:85
+48                android:name="com.google.firebase.components:com.google.firebase.analytics.connector.internal.AnalyticsConnectorRegistrar"
+48-->[com.google.android.gms:play-services-measurement-api:20.1.0] C:\Users\bouha\.gradle\caches\transforms-3\afb63b9f168a583c9a9f9a277041b7bd\transformed\jetified-play-services-measurement-api-20.1.0\AndroidManifest.xml:31:17-139
+49                android:value="com.google.firebase.components.ComponentRegistrar" />
+49-->[com.google.android.gms:play-services-measurement-api:20.1.0] C:\Users\bouha\.gradle\caches\transforms-3\afb63b9f168a583c9a9f9a277041b7bd\transformed\jetified-play-services-measurement-api-20.1.0\AndroidManifest.xml:32:17-82
+50            <meta-data
+50-->[com.google.firebase:firebase-installations:17.0.1] C:\Users\bouha\.gradle\caches\transforms-3\af9a04c311ad76b3e1c1e3c6b85c6ddd\transformed\jetified-firebase-installations-17.0.1\AndroidManifest.xml:18:13-20:85
+51                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar"
+51-->[com.google.firebase:firebase-installations:17.0.1] C:\Users\bouha\.gradle\caches\transforms-3\af9a04c311ad76b3e1c1e3c6b85c6ddd\transformed\jetified-firebase-installations-17.0.1\AndroidManifest.xml:19:17-127
+52                android:value="com.google.firebase.components.ComponentRegistrar" />
+52-->[com.google.firebase:firebase-installations:17.0.1] C:\Users\bouha\.gradle\caches\transforms-3\af9a04c311ad76b3e1c1e3c6b85c6ddd\transformed\jetified-firebase-installations-17.0.1\AndroidManifest.xml:20:17-82
+53        </service>
+54
+55        <provider
+55-->[com.google.firebase:firebase-common:20.1.0] C:\Users\bouha\.gradle\caches\transforms-3\beb1673982e62b10f2205fdbf01e0cbf\transformed\jetified-firebase-common-20.1.0\AndroidManifest.xml:26:9-31:39
+56            android:name="com.google.firebase.provider.FirebaseInitProvider"
+56-->[com.google.firebase:firebase-common:20.1.0] C:\Users\bouha\.gradle\caches\transforms-3\beb1673982e62b10f2205fdbf01e0cbf\transformed\jetified-firebase-common-20.1.0\AndroidManifest.xml:27:13-77
+57            android:authorities="com.aziel.firebaseinitprovider"
+57-->[com.google.firebase:firebase-common:20.1.0] C:\Users\bouha\.gradle\caches\transforms-3\beb1673982e62b10f2205fdbf01e0cbf\transformed\jetified-firebase-common-20.1.0\AndroidManifest.xml:28:13-72
+58            android:directBootAware="true"
+58-->[com.google.firebase:firebase-common:20.1.0] C:\Users\bouha\.gradle\caches\transforms-3\beb1673982e62b10f2205fdbf01e0cbf\transformed\jetified-firebase-common-20.1.0\AndroidManifest.xml:29:13-43
+59            android:exported="false"
+59-->[com.google.firebase:firebase-common:20.1.0] C:\Users\bouha\.gradle\caches\transforms-3\beb1673982e62b10f2205fdbf01e0cbf\transformed\jetified-firebase-common-20.1.0\AndroidManifest.xml:30:13-37
+60            android:initOrder="100" />
+60-->[com.google.firebase:firebase-common:20.1.0] C:\Users\bouha\.gradle\caches\transforms-3\beb1673982e62b10f2205fdbf01e0cbf\transformed\jetified-firebase-common-20.1.0\AndroidManifest.xml:31:13-36
+61
+62        <receiver
+62-->[com.google.android.gms:play-services-measurement:20.1.0] C:\Users\bouha\.gradle\caches\transforms-3\5ab524f657d6af080227c355184e6c58\transformed\jetified-play-services-measurement-20.1.0\AndroidManifest.xml:29:9-33:20
+63            android:name="com.google.android.gms.measurement.AppMeasurementReceiver"
+63-->[com.google.android.gms:play-services-measurement:20.1.0] C:\Users\bouha\.gradle\caches\transforms-3\5ab524f657d6af080227c355184e6c58\transformed\jetified-play-services-measurement-20.1.0\AndroidManifest.xml:30:13-85
+64            android:enabled="true"
+64-->[com.google.android.gms:play-services-measurement:20.1.0] C:\Users\bouha\.gradle\caches\transforms-3\5ab524f657d6af080227c355184e6c58\transformed\jetified-play-services-measurement-20.1.0\AndroidManifest.xml:31:13-35
+65            android:exported="false" >
+65-->[com.google.android.gms:play-services-measurement:20.1.0] C:\Users\bouha\.gradle\caches\transforms-3\5ab524f657d6af080227c355184e6c58\transformed\jetified-play-services-measurement-20.1.0\AndroidManifest.xml:32:13-37
+66        </receiver>
+67
+68        <service
+68-->[com.google.android.gms:play-services-measurement:20.1.0] C:\Users\bouha\.gradle\caches\transforms-3\5ab524f657d6af080227c355184e6c58\transformed\jetified-play-services-measurement-20.1.0\AndroidManifest.xml:35:9-38:40
+69            android:name="com.google.android.gms.measurement.AppMeasurementService"
+69-->[com.google.android.gms:play-services-measurement:20.1.0] C:\Users\bouha\.gradle\caches\transforms-3\5ab524f657d6af080227c355184e6c58\transformed\jetified-play-services-measurement-20.1.0\AndroidManifest.xml:36:13-84
+70            android:enabled="true"
+70-->[com.google.android.gms:play-services-measurement:20.1.0] C:\Users\bouha\.gradle\caches\transforms-3\5ab524f657d6af080227c355184e6c58\transformed\jetified-play-services-measurement-20.1.0\AndroidManifest.xml:37:13-35
+71            android:exported="false" />
+71-->[com.google.android.gms:play-services-measurement:20.1.0] C:\Users\bouha\.gradle\caches\transforms-3\5ab524f657d6af080227c355184e6c58\transformed\jetified-play-services-measurement-20.1.0\AndroidManifest.xml:38:13-37
+72        <service
+72-->[com.google.android.gms:play-services-measurement:20.1.0] C:\Users\bouha\.gradle\caches\transforms-3\5ab524f657d6af080227c355184e6c58\transformed\jetified-play-services-measurement-20.1.0\AndroidManifest.xml:39:9-43:72
+73            android:name="com.google.android.gms.measurement.AppMeasurementJobService"
+73-->[com.google.android.gms:play-services-measurement:20.1.0] C:\Users\bouha\.gradle\caches\transforms-3\5ab524f657d6af080227c355184e6c58\transformed\jetified-play-services-measurement-20.1.0\AndroidManifest.xml:40:13-87
+74            android:enabled="true"
+74-->[com.google.android.gms:play-services-measurement:20.1.0] C:\Users\bouha\.gradle\caches\transforms-3\5ab524f657d6af080227c355184e6c58\transformed\jetified-play-services-measurement-20.1.0\AndroidManifest.xml:41:13-35
+75            android:exported="false"
+75-->[com.google.android.gms:play-services-measurement:20.1.0] C:\Users\bouha\.gradle\caches\transforms-3\5ab524f657d6af080227c355184e6c58\transformed\jetified-play-services-measurement-20.1.0\AndroidManifest.xml:42:13-37
+76            android:permission="android.permission.BIND_JOB_SERVICE" />
+76-->[com.google.android.gms:play-services-measurement:20.1.0] C:\Users\bouha\.gradle\caches\transforms-3\5ab524f657d6af080227c355184e6c58\transformed\jetified-play-services-measurement-20.1.0\AndroidManifest.xml:43:13-69
+77
+78        <meta-data
+78-->[com.google.android.gms:play-services-basement:18.0.0] C:\Users\bouha\.gradle\caches\transforms-3\4916ac5b76716ffc0958ee8e642cb56d\transformed\jetified-play-services-basement-18.0.0\AndroidManifest.xml:21:9-23:69
+79            android:name="com.google.android.gms.version"
+79-->[com.google.android.gms:play-services-basement:18.0.0] C:\Users\bouha\.gradle\caches\transforms-3\4916ac5b76716ffc0958ee8e642cb56d\transformed\jetified-play-services-basement-18.0.0\AndroidManifest.xml:22:13-58
+80            android:value="@integer/google_play_services_version" />
+80-->[com.google.android.gms:play-services-basement:18.0.0] C:\Users\bouha\.gradle\caches\transforms-3\4916ac5b76716ffc0958ee8e642cb56d\transformed\jetified-play-services-basement-18.0.0\AndroidManifest.xml:23:13-66
+81    </application>
+82
+83</manifest>

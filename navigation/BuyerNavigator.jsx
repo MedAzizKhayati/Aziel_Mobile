@@ -2,7 +2,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useColorScheme } from "react-native";
 import Colors from "../constants/Colors";
-import { HomeScreen, ProfileScreen, SettingsScreen } from "../screens";
+import { HomeScreen, ProfileScreen, SettingsScreen, EditProfileScreen, ServiceDetailsScreen, AddressScreen, OrderDetailsScreen } from "../screens";
 import ModalScreen from "../screens/ModalScreen";
 
 const BottomTab = createBottomTabNavigator();
@@ -50,6 +50,30 @@ export default () => {
                     tabBarIcon: ({ color }) => <TabBarIcon name="gear" color={color} />,
                 }}
             />
+            <BottomTab.Screen
+                name="EditProfile"
+                component={EditProfileScreen}
+                options={{
+                    tabBarButton: (props) => null,
+                }}
+            /> 
+            <BottomTab.Screen
+                name="ServiceDetails"
+                component={ServiceDetailsScreen}
+                options={{
+                    tabBarButton: (props) => null,
+                    headerShown: false,
+                }}
+            /> 
+            <BottomTab.Screen
+                name="OrderDetails"
+                component={OrderDetailsScreen}
+                options={{
+                    tabBarButton: (props) => null,
+                    headerShown: false,
+                }}
+            /> 
+             
         </BottomTab.Navigator>
     );
 }

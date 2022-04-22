@@ -1,11 +1,11 @@
 import { FontAwesome } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useContext, useEffect, useState } from 'react';
 import { Image, TouchableOpacity } from 'react-native';
 import { ScrollView, Text, View } from '../../components/Themed';
 import Colors from '../../constants/Colors';
 import { GlobalContext } from '../../context/Provider';
 import useColorScheme from '../../hooks/useColorScheme';
-
 import styles from './styles';
 
 const getRandomImageURI = () => "https://picsum.photos/" + (Math.random() * (100) + 200).toFixed(0);
@@ -54,12 +54,14 @@ const ProfileScreen = ({ navigation }) => {
                     style={styles.photo}
                     source={{ uri: getRandomImageURI() }}
                 />
-                <FontAwesome
+                <MaterialCommunityIcons
+                    name="account-edit"
                     size={20}
                     style={{ position: "absolute", top: 15, right: 15 }}
-                    name="sliders"
                     color={Colors[colorScheme].tint}
+                    onPress={() => navigation.navigate('EditProfile')}
                 />
+               
                 <Text style={styles.user}>
                     {authState.user?.firstName + " " + authState.user?.lastName}
                 </Text>

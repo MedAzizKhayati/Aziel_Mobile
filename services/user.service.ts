@@ -19,14 +19,19 @@ export const getUserMe = async (): Promise<any> => {
 
 
 export const registerUser = async (payload: any): Promise<any> => {
-    return (await axios.post(BASE_URL + '/user', payload)).data;
+    try {
+        return (await axios.post(BASE_URL + '/user', payload)).data;
+    } catch (error) {
+        console.log(error.response.data);
+        
+    }
 }
 
 export const loginUser = async (payload: any): Promise<any> => {
     let response;
     try {
         response = (await axios.post(BASE_URL + '/user/login', payload));
-    } catch (err : any) {
+    } catch (err: any) {
         console.log(err?.response?.data);
         throw err?.response?.data;
     }
@@ -36,6 +41,14 @@ export const loginUser = async (payload: any): Promise<any> => {
     })
     AsyncStorage.setItem('user', JSON.stringify(response.data.user));
     return response.data.user;
+}
+export const updateUser = async (payload: any): Promise<any> => {
+    try {
+        return (await axios.post(BASE_URL + '/user/update', payload)).data;
+    } catch (error) {
+        console.log(error.response.data);
+        
+    }
 }
 
 export const logout = () => {

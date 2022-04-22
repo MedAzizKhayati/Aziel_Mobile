@@ -50,10 +50,11 @@ const SignUpScreen = ({ navigation }) => {
                     confirmPassword: '',
                 }}
                 onSubmit={values => {
-                    delete values?.confirmPassword; 
-                    registerUser(values)}
+                    delete values?.confirmPassword;
+                    registerUser(values)
                 }
-                >
+                }
+            >
                 {({
                     handleSubmit,
                     isValid,

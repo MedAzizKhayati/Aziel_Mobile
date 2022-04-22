@@ -40,7 +40,7 @@ const DATA2 = [
     image: "https://picsum.photos/405",
     rating: 4.9,
     reviews: 18,
-    price: "50 TND",
+    price: "50",
     user: {
       name: "John Doe",
       image: "https://picsum.photos/406"
@@ -51,7 +51,7 @@ const DATA2 = [
     image: "https://picsum.photos/407",
     rating: 5,
     reviews: 77,
-    price: "100 TND",
+    price: "100 ",
     user: {
       name: "Junk Doctor",
       image: "https://picsum.photos/408"
@@ -62,7 +62,7 @@ const DATA2 = [
     image: "https://picsum.photos/409",
     rating: 4.5,
     reviews: 12,
-    price: "30 TND",
+    price: "30 ",
     user: {
       name: "Micheal Jordan",
       image: "https://picsum.photos/410"
@@ -73,7 +73,7 @@ const DATA2 = [
     image: "https://picsum.photos/411",
     rating: 4.5,
     reviews: 77,
-    price: "150 TND",
+    price: "150 ",
     user: {
       name: "Malek Ben Abdallah",
       image: "https://picsum.photos/412"
@@ -84,7 +84,6 @@ const DATA2 = [
 const HomeScreen = ({ navigation }) => {
   const { authState, authDispatch } = useContext(GlobalContext);
   const colorScheme = useColorScheme();
-
   return (
     <ScrollView style={styles?.container}>
       <View style={styles?.searchView}>
@@ -110,12 +109,15 @@ const HomeScreen = ({ navigation }) => {
         <Text style={styles?.popularText}>Popular Services</Text>
         <FlatList
           horizontal
-          nestedScrollEnabled 
+          nestedScrollEnabled
           data={DATA2}
           showsHorizontalScrollIndicator={false}
           keyExtractor={item => item.title}
           renderItem={({ item }) => (
-            <TouchableOpacity style={[styles?.popularView, { backgroundColor: Colors[colorScheme].secondaryBackground }]}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('ServiceDetails', item)}
+              style={[styles?.popularView, { backgroundColor: Colors[colorScheme].secondaryBackground }]}
+            >
               <Image style={styles?.popularImage} source={{ uri: getRandomImageURI() }} />
               <View style={[styles?.userInfo, { backgroundColor: Colors[colorScheme].secondaryBackground }]}>
                 <Image style={styles?.userPicture} source={{ uri: item.user.image }} />
@@ -129,7 +131,7 @@ const HomeScreen = ({ navigation }) => {
                   color="orange"
                 />
                 <Text style={[styles?.serviceRating, { color: Colors[colorScheme].tint }]}>{item.rating} ({item.reviews})</Text>
-                <Text style={[styles?.servicePrice, { color: Colors[colorScheme].tint }]}>FROM {item.price}</Text>
+                <Text style={[styles?.servicePrice, { color: Colors[colorScheme].tint }]}>FROM {item.price} TND</Text>
               </View>
             </TouchableOpacity>
           )}
@@ -139,15 +141,15 @@ const HomeScreen = ({ navigation }) => {
         <Text style={styles?.popularText}>Recently Viewed & More</Text>
         <FlatList
           horizontal
-          nestedScrollEnabled 
+          nestedScrollEnabled
           data={DATA2}
           showsHorizontalScrollIndicator={false}
           keyExtractor={item => item.title}
           renderItem={({ item }) => (
             <TouchableOpacity style={[styles?.popularView, { backgroundColor: Colors[colorScheme].secondaryBackground }]}>
-              <Image style={styles?.popularImage} source={{ uri: getRandomImageURI()}} />
+              <Image style={styles?.popularImage} source={{ uri: getRandomImageURI() }} />
               <View style={[styles?.userInfo, { backgroundColor: Colors[colorScheme].secondaryBackground }]}>
-                <Image style={styles?.userPicture} source={{ uri: item.user.image + 1}} />
+                <Image style={styles?.userPicture} source={{ uri: item.user.image + 1 }} />
                 <Text>{item.user.name}</Text>
               </View>
               <Text style={styles?.popularTitle}>{item.title}</Text>
@@ -158,7 +160,7 @@ const HomeScreen = ({ navigation }) => {
                   color="orange"
                 />
                 <Text style={[styles?.serviceRating, { color: Colors[colorScheme].tint }]}>{item.rating} ({item.reviews})</Text>
-                <Text style={[styles?.servicePrice, { color: Colors[colorScheme].tint }]}>FROM {item.price}</Text>
+                <Text style={[styles?.servicePrice, { color: Colors[colorScheme].tint }]}>FROM {item.price} TND</Text>
               </View>
             </TouchableOpacity>
           )}
