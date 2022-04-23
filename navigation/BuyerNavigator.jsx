@@ -61,16 +61,16 @@ export default () => {
                 name="ServiceDetails"
                 component={ServiceDetailsScreen}
                 options={{
+                    title: 'Service Details',
                     tabBarButton: (props) => null,
-                    headerShown: false,
                 }}
             />
             <BottomTab.Screen
                 name="OrderDetails"
                 component={OrderDetailsScreen}
                 options={{
+                    title: 'Order Details',
                     tabBarButton: (props) => null,
-                    headerShown: false,
                 }}
             />
             <BottomTab.Screen
@@ -78,7 +78,6 @@ export default () => {
                 component={ServicesScreen}
                 options={{
                     title: 'Services',
-                    headerShown: true,
                     tabBarButton: () => null,
                 }}
             />

@@ -86,7 +86,7 @@ const ServicesScreen = ({ route, navigation }) => {
           showsHorizontalScrollIndicator={false}
           keyExtractor={item => item.id}
           renderItem={({ item }) =>
-            <SmallServiceCard service={item} onPress={() => null} />
+            <SmallServiceCard service={item} onPress={() => navigation.navigate("ServiceDetails", {service: item})} />
           }
           ListEmptyComponent={() =>
             isListEnd
@@ -103,7 +103,5 @@ const ServicesScreen = ({ route, navigation }) => {
     </View>
   );
 }
-
-
 
 export default ServicesScreen;

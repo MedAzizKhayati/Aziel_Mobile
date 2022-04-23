@@ -15,3 +15,5 @@ export {default as ServiceDetailsScreen} from "./ServiceDetailsScreen/ServiceDet
 export{default as OrderDetailsScreen} from "./OrderDetailsScreen/OrderDetailsScreen";
 
 export { default as ServicesScreen } from "./ServicesScreen/ServicesScreen";
+
+export {default as LoadingScreen} from "./LoadingScreen/LoadingScreen";

@@ -79,8 +79,8 @@ const HomeScreen = ({ navigation }) => {
   return (
     <ScrollView style={styles?.container}>
       <View style={styles?.searchView}>
-        <TextInput 
-          style={styles?.searchInput} 
+        <TextInput
+          style={styles?.searchInput}
           placeholder="Tap to search..."
           onSubmitEditing={event => navigation.navigate('ServicesScreen', { query: event.nativeEvent.text })}
         />
@@ -115,7 +115,7 @@ const HomeScreen = ({ navigation }) => {
           renderItem={({ item }) =>
             <ServiceCard
               service={item}
-              onPress={() => navigation.navigate('ServiceDetails', item)}
+              onPress={() => navigation.navigate('ServiceDetails', { service: item })}
             />
           }
         />
@@ -129,7 +129,10 @@ const HomeScreen = ({ navigation }) => {
           showsHorizontalScrollIndicator={false}
           keyExtractor={item => item.title}
           renderItem={({ item }) =>
-            <ServiceCard service={item} onPress={() => null} />
+            <ServiceCard
+              service={item}
+              onPress={() => navigation.navigate('ServiceDetails', { service: item })}
+            />
           }
         />
       </View>

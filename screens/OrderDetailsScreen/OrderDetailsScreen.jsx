@@ -30,7 +30,7 @@ const OrderDetailsScreen = ({ navigation, route }) => {
                 <View
                     style={styles.firstView}
                 >
-                    <TouchableOpacity onPress={() => navigation.goBack()}>
+                    {/* <TouchableOpacity onPress={() => navigation.goBack()}>
                         <MaterialCommunityIcons
                             name="chevron-left"
                             style={{
@@ -41,7 +41,7 @@ const OrderDetailsScreen = ({ navigation, route }) => {
                                 borderRadius: 12,
                             }}
                         />
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                     <Text
                         style={{
                             fontSize: 18,
