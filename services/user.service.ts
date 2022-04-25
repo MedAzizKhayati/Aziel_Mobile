@@ -21,7 +21,7 @@ export const getUserMe = async (): Promise<any> => {
 export const registerUser = async (payload: any): Promise<any> => {
     try {
         return (await axios.post(BASE_URL + '/user', payload)).data;
-    } catch (error) {
+    } catch (error: any) {
         console.log(error.response.data);
         
     }
@@ -45,9 +45,8 @@ export const loginUser = async (payload: any): Promise<any> => {
 export const updateUser = async (payload: any): Promise<any> => {
     try {
         return (await axios.post(BASE_URL + '/user/update', payload)).data;
-    } catch (error) {
+    } catch (error: any) {
         console.log(error.response.data);
-        
     }
 }
 

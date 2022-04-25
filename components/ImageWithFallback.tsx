@@ -8,13 +8,13 @@ interface Props {
 }
 export type ImageProps = Props & Image['props'];
 
+const getRandomImageURI = () => {
+    return "https://picsum.photos/" + (Math.random() * (100) + 200).toFixed(0);
+}
+
 const ImageWithFallback = ({ source, alt, ...props }: ImageProps) => {
     const [imageError, setImageError] = useState(false);
-    const [imageSrc, setImageSrc] = useState(source);
-
-    const getRandomImageURI = () => {
-        return "https://picsum.photos/" + (Math.random() * (100) + 200).toFixed(0);
-    }
+    const [imageSrc, setImageSrc] = useState(source || { uri: getRandomImageURI() });
 
     const handleImageError = () => {
         setImageError(true);
@@ -24,7 +24,7 @@ const ImageWithFallback = ({ source, alt, ...props }: ImageProps) => {
             setImageSrc({ uri: getRandomImageURI() });
         }
     };
-    
+
     return (
         <Image
             source={imageSrc}

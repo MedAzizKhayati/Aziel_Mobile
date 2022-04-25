@@ -1,21 +1,33 @@
-import { FontAwesome } from "@expo/vector-icons";
+import { FontAwesome, Entypo } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { useColorScheme } from "react-native";
+import { useContext, useEffect, useState } from "react";
 import Colors from "../constants/Colors";
-import { HomeScreen, ProfileScreen, SettingsScreen, ServicesScreen, EditProfileScreen, ServiceDetailsScreen, AddressScreen, OrderDetailsScreen } from "../screens";
+import { GlobalContext } from "../context/Provider";
+import useColorScheme from "../hooks/useColorScheme";
+import { HomeScreen, ProfileScreen, SettingsScreen, ServicesScreen, EditProfileScreen, ServiceDetailsScreen, OrderDetailsScreen, MessagesScreen, InboxScreen } from "../screens";
 import ModalScreen from "../screens/ModalScreen";
+import { getUnreeadMessagesCount } from "../services/chat.service";
 
 const BottomTab = createBottomTabNavigator();
 
 export default () => {
     const colorScheme = useColorScheme();
+    const [unreadCount, setUnreadCount] = useState(0);
+    const {authState: {user}} = useContext(GlobalContext);
+
+    useEffect(async () => {
+        const count = await getUnreeadMessagesCount(user.id);
+        setUnreadCount(count);
+    });
 
     return (
         <BottomTab.Navigator
-            initialRouteName="TabOne"
+            initialRouteName="Home"
             screenOptions={{
                 tabBarActiveTintColor: Colors[colorScheme].tint,
+                tabBarLabel: () => null,
             }}
+            backBehavior= "history"
         >
             <BottomTab.Screen
                 name="Home"
@@ -43,6 +55,15 @@ export default () => {
                 }}
             />
             <BottomTab.Screen
+                name="InboxScreen"
+                component={InboxScreen}
+                options={{
+                    title: 'Inbox',
+                    tabBarIcon: ({ color }) => <Entypo size={30} name="message" color={color} />,
+                    tabBarBadge: unreadCount > 0 ? unreadCount : null,
+                }}
+            />
+            <BottomTab.Screen
                 name="Settings"
                 component={SettingsScreen}
                 options={{
@@ -54,7 +75,7 @@ export default () => {
                 name="EditProfile"
                 component={EditProfileScreen}
                 options={{
-                    tabBarButton: (props) => null,
+                    tabBarButton: () => null,
                 }}
             />
             <BottomTab.Screen
@@ -62,7 +83,7 @@ export default () => {
                 component={ServiceDetailsScreen}
                 options={{
                     title: 'Service Details',
-                    tabBarButton: (props) => null,
+                    tabBarButton: () => null,
                 }}
             />
             <BottomTab.Screen
@@ -70,7 +91,7 @@ export default () => {
                 component={OrderDetailsScreen}
                 options={{
                     title: 'Order Details',
-                    tabBarButton: (props) => null,
+                    tabBarButton: () => null,
                 }}
             />
             <BottomTab.Screen
@@ -79,6 +100,16 @@ export default () => {
                 options={{
                     title: 'Services',
                     tabBarButton: () => null,
+                }}
+            />
+
+            <BottomTab.Screen
+                name="MessagesScreen"
+                component={MessagesScreen}
+                options={{
+                    title: 'Messages',
+                    tabBarButton: () => null,
+                    tabBarStyle: { display: 'none' },
                 }}
             />
         </BottomTab.Navigator>

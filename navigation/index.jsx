@@ -12,7 +12,7 @@ import LinkingConfiguration from './LinkingConfiguration';
 export default function Navigation({ colorScheme }) {
   return (
     <NavigationContainer
-      linking={LinkingConfiguration}
+      //linking={LinkingConfiguration}
       theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}
     >
       <RootNavigator />
@@ -30,11 +30,17 @@ function RootNavigator() {
     }
   } = React.useContext(GlobalContext);
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        animation: 'slide_from_right'
+      }}
+    >
       <Stack.Screen
         name="Root"
         component={loading ? LoadingScreen : isAuthenticated ? BuyerNavigator : AuthNavigator}
-        options={{ headerShown: false }}
+        options={{
+          headerShown: false,
+        }}
       />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
