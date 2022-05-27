@@ -17,7 +17,11 @@ const OrderDetailsScreen = ({ navigation, route }) => {
     const { authState, authDispatch } = useContext(GlobalContext);
     const colorScheme = useColorScheme();
     const getRandomImageURI = () => "https://picsum.photos/" + (Math.random() * (100) + 200).toFixed(0);
+    const onValidateOrder = () => {
 
+        navigate('home');
+
+    }
     return (
         <View
             style={{
@@ -30,7 +34,7 @@ const OrderDetailsScreen = ({ navigation, route }) => {
                 <View
                     style={styles.firstView}
                 >
-                    <TouchableOpacity onPress={() => navigation.goBack()}>
+                    {/* <TouchableOpacity onPress={() => navigation.goBack()}>
                         <MaterialCommunityIcons
                             name="chevron-left"
                             style={{
@@ -41,15 +45,15 @@ const OrderDetailsScreen = ({ navigation, route }) => {
                                 borderRadius: 12,
                             }}
                         />
-                    </TouchableOpacity>
-                    <Text
+                    </TouchableOpacity> */}
+                    {/* <Text
                         style={{
                             fontSize: 18,
                             color: Colors[colorScheme].tint,
                             fontWeight: 'bold',
                         }}>
                         Order Details
-                    </Text>
+                    </Text> */}
                     <View></View>
                 </View>
                 <View style={{ paddingHorizontal: 16 }}>
@@ -62,17 +66,17 @@ const OrderDetailsScreen = ({ navigation, route }) => {
                                 padding: 14,
                                 justifyContent: 'center',
                                 alignItems: 'center',
-                                backgroundColor:'grey',
+                                backgroundColor: 'grey',
                                 borderRadius: 10,
                                 marginRight: 22,
                             }}>
                             <Image
-                                                source={{ uri: getRandomImageURI() }}
+                                source={{ uri: getRandomImageURI() }}
                                 style={{
                                     width: '150%',
                                     height: '150%',
                                     resizeMode: 'contain',
-                                    borderRadius:10,
+                                    borderRadius: 10,
                                 }}
                             />
                         </View>
@@ -115,7 +119,7 @@ const OrderDetailsScreen = ({ navigation, route }) => {
                     </TouchableOpacity>
                 </View>
                 <View>
-                    <View
+                    {/* <View
                         style={{
                             paddingHorizontal: 16,
                             marginVertical: 10,
@@ -263,7 +267,7 @@ const OrderDetailsScreen = ({ navigation, route }) => {
                                 style={{ fontSize: 22, color: Colors[colorScheme].tint }}
                             />
                         </View>
-                    </View>
+                    </View> */}
                     <View
                         style={{
                             paddingHorizontal: 16,
@@ -291,8 +295,8 @@ const OrderDetailsScreen = ({ navigation, route }) => {
                             <Text
                                 style={{
                                     fontSize: 16,
-                                   // fontWeight: '400',
-                                   fontWeight: 'bold',
+                                    // fontWeight: '400',
+                                    fontWeight: 'bold',
                                     maxWidth: '80%',
                                     color: Colors[colorScheme].tint,
                                     opacity: 0.5,
@@ -307,7 +311,7 @@ const OrderDetailsScreen = ({ navigation, route }) => {
                                     color: Colors[colorScheme].tint,
                                     opacity: 0.8,
                                 }}>
-                            {item.price} TND
+                                {item.price} TND
                             </Text>
                         </View>
                         <View
@@ -336,7 +340,7 @@ const OrderDetailsScreen = ({ navigation, route }) => {
                                     color: Colors[colorScheme].tint,
                                     opacity: 0.8,
                                 }}>
-                                10 TND 
+                                10 TND
                             </Text>
                         </View>
                         <View
@@ -363,7 +367,7 @@ const OrderDetailsScreen = ({ navigation, route }) => {
                                     fontWeight: 'bold',
                                     color: Colors[colorScheme].tint,
                                 }}>
-                            {parseFloat(item.price) + 10} TND
+                                {parseFloat(item.price) + 10} TND
                             </Text>
                         </View>
                     </View>
@@ -379,7 +383,19 @@ const OrderDetailsScreen = ({ navigation, route }) => {
                     justifyContent: 'center',
                     alignItems: 'center',
                 }}>
-
+                <View style={styles.footer}>
+                    <View style={styles.amountDetails}>
+                        <Text style={{ fontSize: 18 }}> Total</Text>
+                        <Text style={{ fontSize: 18, fontWeight: "600" }}>
+                        {parseFloat(item.price) + 10} TND
+                        </Text>
+                    </View>
+                    <TouchableOpacity style={styles.btn}>
+                        <Text style={{ fontSize: 16, color: '#FFF'}}>
+                            Order Now
+                        </Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         </View>
     );

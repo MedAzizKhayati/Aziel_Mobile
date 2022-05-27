@@ -1,4 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
+import React from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
@@ -24,7 +25,7 @@ const SmallServiceCard = ({ service, onPress }: ServiceProps) => {
                     <Image style={styles.userPicture} source={{ uri: BASE_URL + (service.user.image || '') }} />
                     <Text style={styles.userName}>{`${service.user.firstName} ${service.user.lastName}`}</Text>
                 </View>
-                <Text style={styles.serviceTitle}>{service.title}</Text>
+                <Text style={styles.serviceTitle}>{service?.title.length <= 80 ? service?.title : service?.title.slice(0, 80) + '...'} </Text>
                 <View style={[styles.serviceInfo, { backgroundColor: Colors[colorScheme].secondaryBackground }]}>
                     {
                         service.reviewsCount ?
@@ -71,6 +72,7 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
+        justifyContent: "space-between",
     },
     userInfo: {
         width: '100%',
@@ -99,8 +101,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         padding: 10,
-        paddingBottom: 7,
-        justifyContent: 'space-between',
+        paddingBottom: 5,
+        justifyContent: 'space-around',
     },
     servicePrice: {
         flex: 10,

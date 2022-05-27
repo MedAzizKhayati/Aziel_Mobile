@@ -1,3 +1,4 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import { Image } from "react-native";
 
@@ -7,14 +8,14 @@ interface Props {
 }
 export type ImageProps = Props & Image['props'];
 
+const getRandomImageURI = () => {
+    return "https://picsum.photos/" + (Math.random() * (100) + 200).toFixed(0);
+}
+
 const ImageWithFallback = ({ source, alt, ...props }: ImageProps) => {
     const [imageError, setImageError] = useState(false);
-    const [imageSrc, setImageSrc] = useState(source);
+    const [imageSrc, setImageSrc] = useState(source || { uri: getRandomImageURI() });
 
-    const getRandomImageURI = () => {
-        return "https://picsum.photos/" + (Math.random() * (100) + 200).toFixed(0);
-    }
- 
     const handleImageError = () => {
         setImageError(true);
         if (alt)
@@ -23,6 +24,7 @@ const ImageWithFallback = ({ source, alt, ...props }: ImageProps) => {
             setImageSrc({ uri: getRandomImageURI() });
         }
     };
+
     return (
         <Image
             source={imageSrc}

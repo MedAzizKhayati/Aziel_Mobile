@@ -1,5 +1,6 @@
-import { TokenRefreshRequest, applyAuthTokenInterceptor, setAuthTokens } from 'react-native-axios-jwt';
+import { TokenRefreshRequest, applyAuthTokenInterceptor, setAuthTokens, getAccessToken, getRefreshToken } from 'react-native-axios-jwt';
 import axios from 'axios'
+import io from 'socket.io-client';
 
 export const BASE_URL: string = "http://192.168.1.13:3000";
 
@@ -23,7 +24,7 @@ const requestRefresh: TokenRefreshRequest = async (refreshToken: string): Promis
         accessToken: response.data.access_token,
         refreshToken: response.data.refresh_token
     });
-    
+
     return response.data.access_token;
 }
 
@@ -33,3 +34,8 @@ applyAuthTokenInterceptor(axiosInstance, {
     header: "Authorization",  // header name
     headerPrefix: "Bearer ",  // header value prefix
 });
+
+
+// Socket connections
+
+export const chatSocket = io(BASE_URL + '/chat');

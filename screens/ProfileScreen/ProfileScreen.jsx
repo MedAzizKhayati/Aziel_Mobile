@@ -1,4 +1,4 @@
-import { FontAwesome } from '@expo/vector-icons';
+import { AntDesign, FontAwesome, FontAwesome5 } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useContext, useEffect, useState } from 'react';
 import { Image, TouchableOpacity } from 'react-native';
@@ -18,27 +18,33 @@ const ProfileScreen = ({ navigation }) => {
         const newOptions = [
             {
                 title: "Dashboard",
-                icon: "sliders"
+                icon: "sliders",
+                component: FontAwesome
             },
             {
                 title: "Payment History",
-                icon: "credit-card"
+                icon: "credit-card",
+                component: FontAwesome
             },
             {
                 title: "Statistics",
-                icon: "chart-line"
+                icon: "areachart",
+                component: AntDesign
             },
             {
                 title: "Become An Affiliate",
-                icon: "handshake"
+                icon: "hands-helping",
+                component: FontAwesome5
             },
             {
                 title: "Rewards",
-                icon: "gift"
+                icon: "gift",
+                component: FontAwesome
             },
             {
                 title: "Logout",
-                icon: "power-off",
+                icon: "logout",
+                component: AntDesign,
                 onPress: () => authDispatch({ type: 'LOGOUT' })
             },
         ];
@@ -61,7 +67,7 @@ const ProfileScreen = ({ navigation }) => {
                     color={Colors[colorScheme].tint}
                     onPress={() => navigation.navigate('EditProfile')}
                 />
-               
+
                 <Text style={styles.user}>
                     {authState.user?.firstName + " " + authState.user?.lastName}
                 </Text>
@@ -75,12 +81,14 @@ const ProfileScreen = ({ navigation }) => {
                                 style={styles.optionButton}
                                 onPress={option.onPress}
                             >
-                                <FontAwesome
-                                    size={20}
-                                    style={{ flex: 1, marginTop: 7 }}
-                                    name={option.icon}
-                                    color={Colors[colorScheme].tint}
-                                />
+                                {
+                                    <option.component
+                                        color={Colors[colorScheme].tint}
+                                        size={20}
+                                        style={{ flex: 1, marginTop: 7 }}
+                                        name={option.icon}
+                                    />
+                                }
                                 <Text style={styles.textOption}>{option.title}</Text>
                             </TouchableOpacity>
                         )
