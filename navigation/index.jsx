@@ -7,12 +7,11 @@ import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import AuthNavigator from './AuthNavigator';
 import BuyerNavigator from './BuyerNavigator';
-import LinkingConfiguration from './LinkingConfiguration';
+import SellerNavigator from './SellerNavigator';
 
 export default function Navigation({ colorScheme }) {
   return (
     <NavigationContainer
-      //linking={LinkingConfiguration}
       theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}
     >
       <RootNavigator />
@@ -26,7 +25,8 @@ function RootNavigator() {
   const {
     authState: {
       isAuthenticated,
-      loading
+      loading,
+      buyerMode
     }
   } = React.useContext(GlobalContext);
   return (
@@ -37,7 +37,18 @@ function RootNavigator() {
     >
       <Stack.Screen
         name="Root"
-        component={loading ? LoadingScreen : isAuthenticated ? BuyerNavigator : AuthNavigator}
+        children={
+          () => {
+            if (loading)
+              return <LoadingScreen />;
+            if (!isAuthenticated)
+              return <AuthNavigator />;
+            if (buyerMode)
+              return <BuyerNavigator />
+            // else if (!buyerMode))  -- Not Needed
+            return <SellerNavigator />;
+          }
+        }
         options={{
           headerShown: false,
         }}

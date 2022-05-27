@@ -2,6 +2,7 @@ import { AntDesign, FontAwesome, FontAwesome5 } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useContext, useEffect, useState } from 'react';
 import { Image, TouchableOpacity } from 'react-native';
+import SwipeButton from '../../components/SwipeButton';
 import { ScrollView, Text, View } from '../../components/Themed';
 import Colors from '../../constants/Colors';
 import { GlobalContext } from '../../context/Provider';
@@ -74,6 +75,7 @@ const ProfileScreen = ({ navigation }) => {
             </View>
             <View style={[styles.optionsContainer]}>
                 <ScrollView style={[styles.optionsScrollView, { backgroundColor: Colors[colorScheme].secondaryBackground }]}>
+                    <SwipeButton size={50}/>
                     {
                         options.map((option, index) =>
                             <TouchableOpacity

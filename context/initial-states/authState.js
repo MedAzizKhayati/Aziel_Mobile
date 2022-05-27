@@ -3,4 +3,5 @@ export default {
     user: null,
     error: null,
     loading: true,
+    buyerMode: true,
 }
