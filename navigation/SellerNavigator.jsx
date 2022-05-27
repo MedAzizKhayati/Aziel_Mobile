@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import Colors from "../constants/Colors";
 import { GlobalContext } from "../context/Provider";
 import useColorScheme from "../hooks/useColorScheme";
-import { HomeScreen, ProfileScreen, SettingsScreen, ServicesScreen, EditProfileScreen, ServiceDetailsScreen, OrderDetailsScreen, MessagesScreen, InboxScreen, OrdersScreen } from "../screens";
+import { HomeScreen, ProfileScreen, SettingsScreen, ServicesScreen, EditProfileScreen, ServiceDetailsScreen, OrderDetailsScreen, MessagesScreen, InboxScreen } from "../screens";
 import ModalScreen from "../screens/ModalScreen";
 import { getUnreeadMessagesCount } from "../services/chat.service";
 
@@ -39,7 +39,7 @@ export default () => {
             />
             <BottomTab.Screen
                 name="Orders"
-                component={OrdersScreen}
+                component={ModalScreen}
                 options={{
                     title: 'Orders',
                     tabBarIcon: ({ color }) => <TabBarIcon name="bars" color={color} />,
@@ -112,7 +112,6 @@ export default () => {
                     tabBarStyle: { display: 'none' },
                 }}
             />
-            
         </BottomTab.Navigator>
     );
 }

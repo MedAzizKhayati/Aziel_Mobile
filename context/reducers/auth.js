@@ -1,4 +1,4 @@
-import { logout } from "../../services/user.service"
+import { logout } from "../../services/user.service";
 
 const auth = (state, { type, payload }) => {
     switch (type) {
@@ -27,6 +27,16 @@ const auth = (state, { type, payload }) => {
                 ...state,
                 isAuthenticated: false,
                 user: null
+            };
+        case 'BUYER_MODE':
+            return {
+                ...state,
+                buyerMode: true,
+            };
+        case 'SELLER_MODE':
+            return {
+                ...state,
+                buyerMode: false,
             };
         default:
             return state;

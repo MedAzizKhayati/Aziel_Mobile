@@ -7,7 +7,7 @@ export const GlobalContext = createContext({});
 
 const GlobalProvider = ({ children }) => {
     const [authState, authDispatch] = useReducer(authReducer, authInitialState);
-
+    
     useEffect(() => {
         getUserMe()
         .then(user => {
