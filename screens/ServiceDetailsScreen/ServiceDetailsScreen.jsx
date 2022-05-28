@@ -10,7 +10,7 @@ import { BASE_URL } from '../../services/api.service';
 const ServiceDetailsScreen = ({ navigation, route }) => {
     const service = route.params.service;
     const colorScheme = useColorScheme();
-
+    console.log(service);
     return (
         <ScrollView
             showsVerticalScrollIndicator={false}

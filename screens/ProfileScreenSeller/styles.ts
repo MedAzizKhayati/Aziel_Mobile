@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     textOption: {
         flex: 5,
         fontSize: 20,
-    },
+    }
 })
 
 export default styles;

@@ -10,16 +10,9 @@ import { getAllUsers } from '../../services/user.service';
 import { CommonActions, useIsFocused } from "@react-navigation/native";
 
 import styles from './styles';
+import { WEEKDAYS } from '../../utils/helpers';
 
-const WEEKDAYS = [
-    'Sunday',
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-]
+
 
 const InboxScreen = ({ navigation }) => {
     const { authState: { user } } = useContext(GlobalContext);

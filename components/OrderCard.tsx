@@ -12,7 +12,7 @@ const OrderCard = ({ order, onPress }: OrderProps) => {
         //let statusIcon= require('../images/orders.png')
         let statusMessage = status;
         if(status ==='IN_PROGRESS'){
-            statusMessage="delivered"
+            statusMessage="in progress"
         }else if(status ==="COMPLETED"){
             statusMessage="delivered"
         }else if(status ==="CANCELLED"){
