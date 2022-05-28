@@ -48,14 +48,20 @@ export default StyleSheet.create({
         borderRadius: 7,
         padding: 12,
     },
+    dropdownContainer: {
+        borderRadius: 7,
+        borderWidth: 0,
+    },
     icon: {
         marginRight: 5,
+        
     },
     item: {
         padding: 17,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
+        borderWidth: 0,
     },
     textItem: {
         flex: 1,

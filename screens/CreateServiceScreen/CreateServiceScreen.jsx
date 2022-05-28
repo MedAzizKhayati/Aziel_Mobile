@@ -117,7 +117,6 @@ const DropdownMenu = (props) => {
 
     const hasError = errors[name] && touched[name];
 
-    const [open, setOpen] = useState(false);
     const [items, setItems] = useState([
         { label: 'Banana', value: 'banana' },
         { label: 'Apple', value: 'apple' },{ label: 'Banana', value: 'banana' },
@@ -129,16 +128,8 @@ const DropdownMenu = (props) => {
 
     const renderItem = (item) => {
         return (
-          <View style={styles.item}>
+          <View style={{...styles.item, backgroundColor: Colors[colorScheme].secondaryBackground}}>
             <Text style={styles.textItem}>{item.label}</Text>
-            {/* {item.value === value && (
-              <AntDesign
-                style={styles.icon}
-                color="black"
-                name="Safety"
-                size={20}
-              />
-            )} */}
           </View>
         );
       };
@@ -150,7 +141,7 @@ const DropdownMenu = (props) => {
                 style={[styles.dropdown, {backgroundColor: Colors[colorScheme].secondaryBackground}]}
                 placeholderStyle={[styles.placeholderStyle, { color: Colors[colorScheme].text }]}
                 selectedTextStyle={[styles.selectedTextStyle, { color: Colors[colorScheme].text }]}
-                inputSearchStyle={styles.inputSearchStyle}
+                containerStyle={[styles.dropdownContainer]}
                 data={items}
                 maxHeight={300}
                 labelField="label"
