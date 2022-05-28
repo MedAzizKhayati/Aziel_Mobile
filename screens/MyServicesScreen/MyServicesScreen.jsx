@@ -46,6 +46,7 @@ const MyServicesScreen = ({ route, navigation }) => {
       if (newServices.length < limit)
         setIsListEnd(true);
     } catch (error) {
+      console.log(error);
       ToastAndroid.show("Error while loading data...", ToastAndroid.SHORT);
     }
   };

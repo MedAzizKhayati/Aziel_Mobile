@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { View, Text, ScrollView, TextInput } from "../../components/Themed";
 import Colors from "../../constants/Colors";
 import useColorScheme from "../../hooks/useColorScheme";
@@ -6,19 +6,20 @@ import * as yup from 'yup';
 import { Field, Formik } from 'formik';
 
 import styles from "./styles";
-import { TouchableOpacity } from "react-native";
+import { ToastAndroid, TouchableOpacity } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
+import { getAllServiceCategories } from "../../services/service_cateogries.service";
+import { createService } from "../../services/services.service";
 
 const serviceValidationSchema = yup.object().shape({
     title: yup
         .string()
-        .matches(/^[A-Za-z]+$/, "Only letters are allowed")
+        .matches(/^[a-zA-Z ]*$/, "Only letters are allowed")
         .min(10, ({ min }) => `Service Title must be at least ${min} characters`)
         .max(30, ({ max }) => `Service Title must be at most ${max} characters`)
         .required('The Title is required'),
     description: yup
         .string()
-        .matches(/^[A-Za-z]+$/, "Only letters are allowed")
         .min(50, ({ min }) => `The description must be at least ${min} characters`)
         .max(200, ({ max }) => `The description must be at most ${max} characters`)
         .required('The description is required'),
@@ -27,17 +28,46 @@ const serviceValidationSchema = yup.object().shape({
         .min(5, ({ min }) => `The price must be at least ${min}`)
         .max(10000, ({ max }) => `The price must be at most ${max}`)
         .required('Price is required'),
-    category: yup
+    categoryId: yup
         .string()
         .required('Category is required'),
 })
 
 const CreateServiceScreen = ({ navigation }) => {
     const colorScheme = useColorScheme();
+    const [categories, setCategories] = useState([]);
 
-    const createService = (values) => {
+    const createService_ = (values) => {
         console.log(values);
+        createService(values)
+            .then(res => {
+                ToastAndroid.showWithGravityAndOffset(
+                    "Your Service Has Been Successfully Created!",
+                    ToastAndroid.LONG,
+                    ToastAndroid.BOTTOM,
+                    25,
+                    50
+                );
+                navigation.navigate('Home');
+            })
+            .catch(err => {
+                console.log(err);
+                ToastAndroid.showWithGravityAndOffset(
+                    "There has been an error, try again later!",
+                    ToastAndroid.LONG,
+                    ToastAndroid.BOTTOM,
+                    25,
+                    50
+                );
+            })
     };
+
+    useEffect(() => {
+        getAllServiceCategories()
+            .then(res => {
+                setCategories([...res, { id: "_", title: "Other" }]);
+            });
+    }, [])
 
     return (
         <ScrollView style={styles.container}>
@@ -47,9 +77,9 @@ const CreateServiceScreen = ({ navigation }) => {
                     title: '',
                     description: '',
                     price: '',
-                    category: '',
+                    categoryId: false,
                 }}
-                onSubmit={values => createService(values)}
+                onSubmit={values => createService_(values)}
             >
                 {({
                     handleSubmit,
@@ -80,8 +110,8 @@ const CreateServiceScreen = ({ navigation }) => {
                         <Field
                             component={DropdownMenu}
                             label='Category'
-                            name='category'
-                            data={[{ value: "banana" }]}
+                            name='categoryId'
+                            data={categories}
                         />
                         <View style={[
                             styles.fieldView,
@@ -117,42 +147,34 @@ const DropdownMenu = (props) => {
 
     const hasError = errors[name] && touched[name];
 
-    const [items, setItems] = useState([
-        { label: 'Banana', value: 'banana' },
-        { label: 'Apple', value: 'apple' },{ label: 'Banana', value: 'banana' },
-        { label: 'Apple', value: 'apple' },{ label: 'Banana', value: 'banana' },
-        { label: 'Apple', value: 'apple' },{ label: 'Banana', value: 'banana' },
-        { label: 'Apple', value: 'apple' },
-        
-    ]);
-
     const renderItem = (item) => {
         return (
-          <View style={{...styles.item, backgroundColor: Colors[colorScheme].secondaryBackground}}>
-            <Text style={styles.textItem}>{item.label}</Text>
-          </View>
+            <View style={{ ...styles.item, backgroundColor: Colors[colorScheme].secondaryBackground }}>
+                <Text style={styles.textItem}>{item.title}</Text>
+            </View>
         );
-      };
+    };
 
     return (
         <View style={styles.fieldView}>
             <Text style={{ ...styles.fieldTitle, color: Colors[colorScheme].tint }}>{props.label}</Text>
             <Dropdown
-                style={[styles.dropdown, {backgroundColor: Colors[colorScheme].secondaryBackground}]}
-                placeholderStyle={[styles.placeholderStyle, { color: Colors[colorScheme].text }]}
+                style={[styles.dropdown, { backgroundColor: Colors[colorScheme].secondaryBackground }]}
+                placeholderStyle={[styles.placeholderStyle, { color: Colors[colorScheme].tint }]}
                 selectedTextStyle={[styles.selectedTextStyle, { color: Colors[colorScheme].text }]}
-                containerStyle={[styles.dropdownContainer]}
-                data={items}
+                containerStyle={[styles.dropdownContainer, { backgroundColor: Colors[colorScheme].secondaryBackground }]}
                 maxHeight={300}
-                labelField="label"
-                valueField="value"
+                labelField="title"
+                valueField="id"
                 placeholder={"Select A " + props.label}
                 searchPlaceholder="Search..."
                 value={value}
                 onChange={item => {
-                  onChange(name)(item.value);
+                    onChange(name)(item.id);
                 }}
+                dropdownPosition="top"
                 renderItem={renderItem}
+                {...inputProps}
             />
             {hasError && <Text style={styles.errorText}>{errors[name]}</Text>}
         </View>
