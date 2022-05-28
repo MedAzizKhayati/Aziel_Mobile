@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import Colors from "../constants/Colors";
 import { GlobalContext } from "../context/Provider";
 import useColorScheme from "../hooks/useColorScheme";
-import { HomeScreen, ProfileScreen, SettingsScreen, ServicesScreen, EditProfileScreen, ServiceDetailsScreen, OrderDetailsScreen, MessagesScreen, InboxScreen } from "../screens";
+import { HomeScreen, ProfileScreen, SettingsScreen, ServicesScreen, EditProfileScreen, ServiceDetailsScreen, OrderDetailsScreen, MessagesScreen, InboxScreen, ProfileScreenSeller, MyServicesScreen, HomeScreenSeller, CreateServiceScreen } from "../screens";
 import ModalScreen from "../screens/ModalScreen";
 import { getUnreeadMessagesCount } from "../services/chat.service";
 
@@ -13,7 +13,7 @@ const BottomTab = createBottomTabNavigator();
 export default () => {
     const colorScheme = useColorScheme();
     const [unreadCount, setUnreadCount] = useState(0);
-    const {authState: {user}} = useContext(GlobalContext);
+    const { authState: { user } } = useContext(GlobalContext);
 
     useEffect(async () => {
         const count = await getUnreeadMessagesCount(user.id);
@@ -27,11 +27,11 @@ export default () => {
                 tabBarActiveTintColor: Colors[colorScheme].tint,
                 tabBarLabel: () => null,
             }}
-            backBehavior= "history"
+            backBehavior="history"
         >
             <BottomTab.Screen
                 name="Home"
-                component={HomeScreen}
+                component={HomeScreenSeller}
                 options={{
                     title: 'Home',
                     tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
@@ -56,21 +56,21 @@ export default () => {
             />
             <BottomTab.Screen
                 name="Profile"
-                component={ProfileScreen}
+                component={ProfileScreenSeller}
                 options={{
                     title: 'Profile',
                     headerShown: false,
                     tabBarIcon: ({ color }) => <TabBarIcon name="user" color={color} />,
                 }}
             />
-            {/* <BottomTab.Screen
+            <BottomTab.Screen
                 name="Settings"
                 component={SettingsScreen}
                 options={{
                     title: 'Settings',
                     tabBarIcon: ({ color }) => <TabBarIcon name="gear" color={color} />,
                 }}
-            /> */}
+            />
             <BottomTab.Screen
                 name="EditProfile"
                 component={EditProfileScreen}
@@ -110,6 +110,24 @@ export default () => {
                     title: 'Messages',
                     tabBarButton: () => null,
                     tabBarStyle: { display: 'none' },
+                }}
+            />
+
+            <BottomTab.Screen
+                name="MyServicesScreen"
+                component={MyServicesScreen}
+                options={{
+                    title: 'My Services',
+                    tabBarButton: () => null,
+                }}
+            />
+
+            <BottomTab.Screen
+                name="CreateServiceScreen"
+                component={CreateServiceScreen}
+                options={{
+                    title: 'Create Service',
+                    tabBarButton: () => null,
                 }}
             />
         </BottomTab.Navigator>

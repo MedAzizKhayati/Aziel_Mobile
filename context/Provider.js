@@ -1,4 +1,5 @@
 import React, { createContext, useEffect, useReducer } from "react";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getUserMe } from "../services/user.service";
 import authInitialState from "./initial-states/authState";
 import authReducer from "./reducers/auth";
@@ -7,17 +8,20 @@ export const GlobalContext = createContext({});
 
 const GlobalProvider = ({ children }) => {
     const [authState, authDispatch] = useReducer(authReducer, authInitialState);
-    
-    useEffect(() => {
+
+    useEffect(async () => {
         getUserMe()
-        .then(user => {
-            authDispatch({ type: 'LOGIN', payload: user });
-            console.log("User", user);
-        })
-        .catch(err => {
-            authDispatch({ type: 'LOADED' });
-            console.log(err);
-        });
+            .then(user => {
+                authDispatch({ type: 'LOGIN', payload: user });
+                console.log("User", user);
+            })
+            .catch(err => {
+                authDispatch({ type: 'LOADED' });
+                console.log(err);
+            });
+        const mode = await AsyncStorage.getItem('mode');
+        console.log(mode);
+        authDispatch({ type: mode });
     }, [])
 
     return (

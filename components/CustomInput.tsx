@@ -7,9 +7,9 @@ const CustomInput = (props: any) => {
         field: { name, onBlur, onChange, value },
         form: { errors, touched, setFieldTouched },
         ...inputProps
-    } = props
+    } = props;
 
-    const hasError = errors[name] && touched[name]
+    const hasError = errors[name] && touched[name];
 
     return (
         <>

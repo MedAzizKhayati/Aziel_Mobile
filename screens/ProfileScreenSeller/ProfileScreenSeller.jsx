@@ -16,11 +16,11 @@ const ProfileScreen = ({ navigation }) => {
     const { authState, authDispatch } = useContext(GlobalContext);
     const colorScheme = useColorScheme();
     const [options, setOptions] = useState([]);
-    const changeMode = async (mode) => {
-        authDispatch({ type: mode });
-        await AsyncStorage.setItem('mode', mode);
+    const changeMode = (mode) => {
+        authDispatch({type: mode});
+        AsyncStorage.setItem('mode', mode);
     }
-    useEffect(async () => {
+    useEffect(() => {
         const newOptions = [
             {
                 title: "Dashboard",
@@ -28,9 +28,10 @@ const ProfileScreen = ({ navigation }) => {
                 component: FontAwesome
             },
             {
-                title: "Payment History",
+                title: "My Services",
                 icon: "credit-card",
-                component: FontAwesome
+                component: FontAwesome,
+                onPress: () => navigation.navigate("MyServicesScreen")
             },
             {
                 title: "Statistics",
