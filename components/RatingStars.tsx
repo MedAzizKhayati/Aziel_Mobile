@@ -13,5 +13,5 @@ export default ({ rating, size }: { rating: number, size: number }) => {
             />,
         );
     }
-    return <View style={{flexDirection: 'row'}}>{stars}</View>;
+    return <View style={{flexDirection: 'row', alignItems: 'center'}}>{stars}</View>;
 };

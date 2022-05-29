@@ -46,7 +46,7 @@ const EditServiceScreen = ({ navigation, route }) => {
         title: service?.title,
         description: service?.description,
         price: service?.price,
-        categoryId: service?.category.id
+        categoryId: service?.category?.id || '',
     });
     const [errors, setErrors] = useState([]);
     const colorScheme = useColorScheme();
@@ -170,7 +170,7 @@ const EditServiceScreen = ({ navigation, route }) => {
                             ...styles.categoryTitle,
                             color: Colors[colorScheme].tint,
                         }}>
-                        {service.category.title}
+                        {service?.category?.title}
                     </Text>
                     <View style={styles.serviceRatingContainer}>
                         <View style={{ flexDirection: 'row', alignservices: 'center' }}>
