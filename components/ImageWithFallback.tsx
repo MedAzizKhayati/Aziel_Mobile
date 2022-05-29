@@ -25,6 +25,11 @@ const ImageWithFallback = ({ source, alt, ...props }: ImageProps) => {
         }
     };
 
+    useEffect(() => {
+        setImageSrc(source || { uri: getRandomImageURI()});
+        // console.log(source);
+    }, [source]);
+
     return (
         <Image
             source={imageSrc}

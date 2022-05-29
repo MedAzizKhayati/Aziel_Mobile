@@ -1,3 +1,5 @@
+import { BASE_URL } from "../services/api.service";
+
 export const MONTHS = [
     'January',
     'February',
@@ -25,4 +27,8 @@ export const WEEKDAYS = [
 
 export const getMonthName = (month) => {
     return MONTHS[month];
+}
+
+export const formatURI = (uri) => {
+    return BASE_URL + (uri?.split('\\').join('/') || '');
 }

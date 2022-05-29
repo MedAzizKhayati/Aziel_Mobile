@@ -9,17 +9,27 @@ import { useContext, useEffect, useState } from "react";
 import { getServicesByUser } from "../../services/services.service";
 import { FlatList } from "react-native";
 import ServiceCard from "../../components/ServiceCard";
+import { useIsFocused } from "@react-navigation/native";
+import { setUserContext } from "../../context/reducers/auth";
+import Toast from 'react-native-toast-message';
+
 
 const ProfileScreenSeller = ({ navigation }) => {
     const colorScheme = useColorScheme();
+    const isFocused = useIsFocused();
+
     const [services, setServices] = useState([]);
-    const { authState: { user } } = useContext(GlobalContext);
+    const { authState: { user }, authDispatch } = useContext(GlobalContext);
 
     useEffect(() => {
         getServicesByUser(user?.id)
             .then(services => setServices(services))
-            .catch(err => ToastAndroid.show(err.response.data.message, ToastAndroid.SHORT));
-    }, [])
+            .catch(err => Toast.show({
+                type: "error",
+                text1: err.response.data.message, 
+            }));
+        setUserContext(authDispatch);
+    }, [isFocused])
 
     return (
         <ScrollView>
@@ -35,7 +45,7 @@ const ProfileScreenSeller = ({ navigation }) => {
                     renderItem={({ item }) =>
                         <ServiceCard
                             service={item}
-                            onPress={() => navigation.navigate('ServiceDetails', { service: item })}
+                            onPress={() => navigation.navigate('EditServiceScreen', { service: item })}
                         />
                     }
                 />

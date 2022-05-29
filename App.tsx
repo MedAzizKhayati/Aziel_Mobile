@@ -7,6 +7,8 @@ import GlobalProvider from './context/Provider';
 import useCachedResources from './hooks/useCachedResources';
 import useColorScheme from './hooks/useColorScheme';
 import Navigation from './navigation';
+import Toast from 'react-native-toast-message';
+
 
 const App = () => {
   const isLoadingComplete = useCachedResources();
@@ -21,6 +23,7 @@ const App = () => {
           <>
             <Navigation colorScheme={colorScheme} />
             <StatusBar />
+            <Toast/>
           </>
         </GlobalProvider>
       </SafeAreaProvider>

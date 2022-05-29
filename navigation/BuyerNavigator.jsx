@@ -1,5 +1,6 @@
 import { FontAwesome, Entypo } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { useIsFocused } from "@react-navigation/native";
 import { useContext, useEffect, useState } from "react";
 import Colors from "../constants/Colors";
 import { GlobalContext } from "../context/Provider";
@@ -7,13 +8,14 @@ import useColorScheme from "../hooks/useColorScheme";
 import { HomeScreen, ProfileScreen, SettingsScreen, ServicesScreen, EditProfileScreen, ServiceDetailsScreen, OrderDetailsScreen, MessagesScreen, InboxScreen } from "../screens";
 import ModalScreen from "../screens/ModalScreen";
 import { getUnreeadMessagesCount } from "../services/chat.service";
+import { getUserMe } from "../services/user.service";
 
 const BottomTab = createBottomTabNavigator();
 
 export default () => {
     const colorScheme = useColorScheme();
     const [unreadCount, setUnreadCount] = useState(0);
-    const {authState: {user}} = useContext(GlobalContext);
+    const {authState: {user}, authDispatch} = useContext(GlobalContext);
 
     useEffect(async () => {
         const count = await getUnreeadMessagesCount(user.id);

@@ -6,7 +6,9 @@ import { Text, TextInput, View } from '../../components/Themed';
 import Colors from '../../constants/Colors';
 import { GlobalContext } from '../../context/Provider';
 import useColorScheme from '../../hooks/useColorScheme';
+import { BASE_URL } from '../../services/api.service';
 import { findByChatId, markMessagesAsSeen, sendMessageToChat, subscribeToChat } from '../../services/chat.service';
+import { formatURI } from '../../utils/helpers';
 
 import styles from './styles';
 
@@ -98,7 +100,7 @@ const MessagesScreen = ({ route, navigation }) => {
             return <ActivityIndicator size="large" color={Colors[colorScheme].text} />
         return (
             <View style={styles.headerComponent}>
-                <Image style={styles.userPhoto} />
+                <Image source={{uri: formatURI(target?.profileImage)}} style={styles.userPhoto} />
                 <Text style={styles.userName}>
                     {target?.firstName + ' ' + target?.lastName}
                 </Text>

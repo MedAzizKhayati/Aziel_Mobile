@@ -23,7 +23,7 @@ export const registerUser = async (payload: any): Promise<any> => {
         return (await axios.post(BASE_URL + '/user', payload)).data;
     } catch (error: any) {
         console.log(error.response.data);
-        
+
     }
 }
 
@@ -44,10 +44,15 @@ export const loginUser = async (payload: any): Promise<any> => {
 }
 export const updateUser = async (payload: any): Promise<any> => {
     try {
-        return (await axios.post(BASE_URL + '/user/update', payload)).data;
+        return (await axiosInstance.post('/user/update', payload)).data;
     } catch (error: any) {
         console.log(error.response.data);
     }
+}
+
+export const updateProfilePicture = async (payload: any): Promise<any> => {
+    return (await axiosInstance.post('/user/upload', payload)).data;
+    //return (await axiosInstance.post('/services/upload-image/0', payload)).data;
 }
 
 export const logout = () => {

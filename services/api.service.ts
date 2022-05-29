@@ -1,4 +1,4 @@
-import { TokenRefreshRequest, applyAuthTokenInterceptor, setAuthTokens, getAccessToken, getRefreshToken } from 'react-native-axios-jwt';
+import { TokenRefreshRequest, applyAuthTokenInterceptor, setAuthTokens } from 'react-native-axios-jwt';
 import axios from 'axios'
 import io from 'socket.io-client';
 
@@ -25,7 +25,9 @@ const requestRefresh: TokenRefreshRequest = async (refreshToken: string): Promis
         accessToken: response.data.access_token,
         refreshToken: response.data.refresh_token
     });
-
+    console.log("\u001b[1;32mR. Token:", response.data.refresh_token.substring(0, 20) + "...");
+    console.log("A. Token:", response.data.access_token.substring(0, 20) + "...");
+    console.log( "\u001b[0m" );
     return response.data.access_token;
 }
 

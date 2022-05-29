@@ -1,8 +1,9 @@
-import { logout } from "../../services/user.service";
+import { getUserMe, logout } from "../../services/user.service";
 
 const auth = (state, { type, payload }) => {
     switch (type) {
         case 'LOGIN':
+        case 'SET_USER':
             return {
                 ...state,
                 isAuthenticated: true,
@@ -43,5 +44,11 @@ const auth = (state, { type, payload }) => {
     }
 }
 
+export const setUserContext = async (authDispatch) => {
+    authDispatch({
+        type: 'SET_USER',
+        payload: await getUserMe()
+    });
+}
 
 export default auth;

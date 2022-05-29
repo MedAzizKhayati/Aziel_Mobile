@@ -4,12 +4,14 @@ import Colors from "../../constants/Colors";
 import useColorScheme from "../../hooks/useColorScheme";
 import * as yup from 'yup';
 import { Field, Formik } from 'formik';
+import Toast from 'react-native-toast-message';
 
 import styles from "./styles";
 import { ToastAndroid, TouchableOpacity } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
 import { getAllServiceCategories } from "../../services/service_cateogries.service";
 import { createService } from "../../services/services.service";
+
 
 const serviceValidationSchema = yup.object().shape({
     title: yup
@@ -31,7 +33,7 @@ const serviceValidationSchema = yup.object().shape({
     categoryId: yup
         .string()
         .required('Category is required'),
-})
+});
 
 const CreateServiceScreen = ({ navigation }) => {
     const colorScheme = useColorScheme();
@@ -41,24 +43,18 @@ const CreateServiceScreen = ({ navigation }) => {
         console.log(values);
         createService(values)
             .then(res => {
-                ToastAndroid.showWithGravityAndOffset(
-                    "Your Service Has Been Successfully Created!",
-                    ToastAndroid.LONG,
-                    ToastAndroid.BOTTOM,
-                    25,
-                    50
-                );
+                Toast.show({
+                    type: 'success',
+                    text1: "Your Service Has Been Successfully Created!",
+                })
                 navigation.navigate('Home');
             })
             .catch(err => {
                 console.log(err);
-                ToastAndroid.showWithGravityAndOffset(
-                    "There has been an error, try again later!",
-                    ToastAndroid.LONG,
-                    ToastAndroid.BOTTOM,
-                    25,
-                    50
-                );
+                Toast.show({
+                    type: 'error',
+                    text1: err?.response.data?.message || "Something went wrong",
+                })
             })
     };
 
