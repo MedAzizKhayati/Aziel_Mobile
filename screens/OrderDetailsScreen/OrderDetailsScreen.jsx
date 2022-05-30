@@ -8,7 +8,7 @@ import { GlobalContext } from '../../context/Provider';
 import { ScrollView, Text, View, TextInput } from '../../components/Themed';
 import styles from '../OrderDetailsScreen/styles';
 import useColorScheme from '../../hooks/useColorScheme';
-import { PaymentTypePopup } from 'react-native-raw-bottom-sheet';
+import {BottomPopup} from '../../components/bottomPopup'
 
 const OrderDetailsScreen = ({ navigation, route }) => {
 
@@ -16,37 +16,14 @@ const OrderDetailsScreen = ({ navigation, route }) => {
     const { authState, authDispatch } = useContext(GlobalContext);
     const colorScheme = useColorScheme();
     const getRandomImageURI = () => "https://picsum.photos/" + (Math.random() * (100) + 200).toFixed(0);
+     let popupRef = React.createRef();
+     const onShowPopup =()=>{
+    //    popupRef.show();
+     }
+    const onClosePopup=()=>{
+       popupRef.close();
+     }
 
-    const popupRef = createRef < PaymentTypePopup > {};
-    const onValidateOrder = () => {
-        popupRef.current?.open()
-    }
-    const popupView = () => {
-        return (
-            <PaymentTypePopup
-                height={400}
-                ref={popupRef}
-                closeOnDragDown={true}
-                closeOnPressMask={false}
-                customStyles={{
-                    wrapper: {
-                        backgroundColor: "transparent",
-                    },
-                    draggableIncon: {
-                        backgroundColor: "#000"
-                    },
-                    container: {
-                        justifyContent: 'flex-start',
-                        alignItems: 'center',
-                    }
-                }}
-            >
-                <View>
-                    <Text> Payment Options </Text>
-                </View>
-            </PaymentTypePopup>
-        )
-    }
     return (
         <View
             style={{
@@ -220,13 +197,16 @@ const OrderDetailsScreen = ({ navigation, route }) => {
             </ScrollView>
 
             <View style={styles.footer}>
-                <TouchableOpacity style={styles.btn} onPress={onValidateOrder} >
+                <TouchableOpacity style={styles.btn} onPress={onShowPopup} >
                     <Text style={{ color: "black", fontSize: 18, fontWeight: 'bold' }}>
                         Order Now
                     </Text>
                 </TouchableOpacity>
+                <BottomPopup
+                ref={(target) => popupRef = target}
+                onTouchOutside={onClosePopup}
+                />
             </View>
-            {/* <popupView/> */}
         </View>
     );
 };
