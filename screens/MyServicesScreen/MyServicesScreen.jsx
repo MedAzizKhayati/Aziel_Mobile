@@ -1,3 +1,4 @@
+import { useIsFocused } from '@react-navigation/native';
 import { useContext, useEffect, useState } from 'react';
 import { ActivityIndicator, FlatList, ToastAndroid, TouchableOpacity } from 'react-native';
 import SmallServiceCard from '../../components/SmallServiceCard';
@@ -9,9 +10,10 @@ import {  getServicesByUser } from '../../services/services.service';
 
 import styles from './styles';
 
-const MyServicesScreen = ({ route, navigation }) => {
+const MyServicesScreen = ({ navigation }) => {
   const limit = 10;
   const colorScheme = useColorScheme();
+  const isFocused = useIsFocused();
 
   const [services, setServices] = useState([]);
   const [page, setPage] = useState(1);
@@ -35,7 +37,7 @@ const MyServicesScreen = ({ route, navigation }) => {
         if (services.length < limit) setIsListEnd(true);
       })
       .catch(err => ToastAndroid.show(err.response.data.message, ToastAndroid.SHORT));
-  }, [apiCall, apiParam]);
+  }, [apiCall, apiParam, isFocused ]);
 
   const loadMoreServices = async () => {
     if (isListEnd) return;
@@ -46,6 +48,7 @@ const MyServicesScreen = ({ route, navigation }) => {
       if (newServices.length < limit)
         setIsListEnd(true);
     } catch (error) {
+      console.log(error);
       ToastAndroid.show("Error while loading data...", ToastAndroid.SHORT);
     }
   };
@@ -71,7 +74,7 @@ const MyServicesScreen = ({ route, navigation }) => {
           showsHorizontalScrollIndicator={false}
           keyExtractor={item => item.id}
           renderItem={({ item }) =>
-            <SmallServiceCard service={item} onPress={() => navigation.navigate("ServiceDetails", { service: item })} />
+            <SmallServiceCard service={item} onPress={() => navigation.navigate("EditServiceScreen", { service: item })} />
           }
           ListEmptyComponent={() =>
             isListEnd

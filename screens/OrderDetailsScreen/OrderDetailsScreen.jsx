@@ -226,7 +226,7 @@ const OrderDetailsScreen = ({ navigation, route }) => {
                     </Text>
                 </TouchableOpacity>
             </View>
-            <popupView/>
+            {/* <popupView/> */}
         </View>
     );
 };

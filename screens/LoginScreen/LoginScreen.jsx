@@ -9,6 +9,7 @@ import CustomInput from '../../components/CustomInput';
 import { loginUser } from '../../services/user.service';
 import { useContext } from 'react';
 import { GlobalContext } from '../../context/Provider';
+import Toast from 'react-native-toast-message';
 
 const loginValidationSchema = yup.object().shape({
     email: yup
@@ -36,12 +37,16 @@ const LoginScreen = ({ navigation }) => {
                 onSubmit={values => {
                     loginUser(values)
                         .then(user => {
-                            console.log(user);
                             authDispatch({ type: 'LOGIN', payload: user });
                         })
                         .catch(err => {
-                            // TODO: Show error message
-                        })
+                            console.log(err?.response?.data);
+                            Toast.show({
+                                type: 'error',
+                                text1: 'Login Failed',
+                                text1: err?.response?.data?.message,
+                            });
+                        });
                 }}
             >
                 {({

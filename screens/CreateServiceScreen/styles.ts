@@ -42,8 +42,8 @@ export default StyleSheet.create({
         marginHorizontal: 10,
     },
     dropdown: {
+        flex: 1,
         width: "100%",
-        margin: 16,
         height: 50,
         borderRadius: 7,
         padding: 12,
@@ -51,10 +51,6 @@ export default StyleSheet.create({
     dropdownContainer: {
         borderRadius: 7,
         borderWidth: 0,
-    },
-    icon: {
-        marginRight: 5,
-        
     },
     item: {
         padding: 17,
@@ -72,10 +68,6 @@ export default StyleSheet.create({
     },
     selectedTextStyle: {
         fontSize: 16,
-    },
-    iconStyle: {
-        width: 20,
-        height: 20,
     },
     inputSearchStyle: {
         height: 40,

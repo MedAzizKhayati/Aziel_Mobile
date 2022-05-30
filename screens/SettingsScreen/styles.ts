@@ -6,6 +6,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'flex-end',
     },
+    optionsContainer: {
+        flex: 1,
+        
+    },
     title: {
         fontSize: 20,
         fontWeight: 'bold',

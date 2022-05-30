@@ -10,7 +10,7 @@ import { getAllUsers } from '../../services/user.service';
 import { CommonActions, useIsFocused } from "@react-navigation/native";
 
 import styles from './styles';
-import { WEEKDAYS } from '../../utils/helpers';
+import { formatURI, WEEKDAYS } from '../../utils/helpers';
 
 
 
@@ -71,7 +71,7 @@ const InboxScreen = ({ navigation }) => {
                         style={styles.userButton}
                         onPress={() => chatWithUser(item)}
                     >
-                        <Image style={styles.userPhoto} />
+                        <Image source={{uri: formatURI(item?.profileImage)}} style={styles.userPhoto} />
                         <View style={styles.messageBox}>
                             <Text style={styles.userInfo}>
                                 {item.firstName}  {item.lastName}

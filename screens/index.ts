@@ -24,10 +24,13 @@ export {default as InboxScreen} from "./InboxScreen/InboxScreen";
 
 export{default as OrdersScreen} from "./OrdersScreen/OrdersScreen";
 
-export { default as ProfileScreenSeller } from "./ProfileScreenSeller/ProfileScreenSeller";
-
 export { default as MyServicesScreen } from "./MyServicesScreen/MyServicesScreen";
 
 export { default as HomeScreenSeller } from "./HomeScreenSeller/HomeScreenSeller";
 
 export { default as CreateServiceScreen } from "./CreateServiceScreen/CreateServiceScreen";
+
+export { default as EditServiceScreen } from "./EditServiceScreen/EditServiceScreen";
+
+
+

@@ -8,23 +8,12 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         padding: 10,
+        paddingTop: 20,
         alignItems: "center",
-    },
-    searchView: {
-        width: '100%',
-        padding: 25,
-        alignItems: 'center',
-        justifyContent: 'flex-start',
-    },
-    searchInput: {
-        width: '100%',
-        height: 45,
-        borderRadius: 5,
-        paddingHorizontal: 10,
     },
     servicesContainer: {
         width: '100%',
-        paddingBottom: 0,
+        paddingBottom: 65,
     },
     emptyText: {
         fontSize: 20,

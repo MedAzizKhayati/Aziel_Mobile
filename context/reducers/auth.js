@@ -1,22 +1,20 @@
-import { logout } from "../../services/user.service";
+import { getUserMe, logout } from "../../services/user.service";
 
 const auth = (state, { type, payload }) => {
     switch (type) {
         case 'LOGIN':
+        case 'SET_USER':
             return {
                 ...state,
                 isAuthenticated: true,
-                loading: false,
                 user: payload,
             };
         case 'LOADING':
-            logout();
             return {
                 ...state,
                 loading: true,
             };
         case 'LOADED':
-            logout();
             return {
                 ...state,
                 loading: false,
@@ -38,10 +36,21 @@ const auth = (state, { type, payload }) => {
                 ...state,
                 buyerMode: false,
             };
+        case 'SET_UNREAD_MESSAGES_COUNT':
+            return {
+                ...state,
+                unreadMessagesCount: payload,
+            };
         default:
             return state;
     }
 }
 
+export const setUserContext = async (authDispatch) => {
+    authDispatch({
+        type: 'SET_USER',
+        payload: await getUserMe()
+    });
+}
 
 export default auth;

@@ -1,16 +1,12 @@
-import { useContext, useEffect, useState} from 'react';
+import { useContext} from 'react';
 import { GlobalContext } from '../../context/Provider';
 import useColorScheme from '../../hooks/useColorScheme';
 import { ScrollView, Text, View, TextInput } from '../../components/Themed';
 import { Image, TouchableOpacity } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
-import { Icon } from '@expo/vector-icons'
 import { FontAwesome } from '@expo/vector-icons';
 import Colors from '../../constants/Colors';
-import BottomSheet from 'reanimated-bottom-sheet';
-import Animated from 'react-native-reanimated';
 import 'react-native-gesture-handler';
-import * as ImagePicker from 'expo-image-picker';
 import styles from './styles';
 
 

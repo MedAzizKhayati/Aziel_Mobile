@@ -4,4 +4,5 @@ export default {
     error: null,
     loading: true,
     buyerMode: true,
+    unreadMessagesCount: 0,
 }
