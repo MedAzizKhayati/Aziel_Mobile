@@ -7,17 +7,14 @@ const auth = (state, { type, payload }) => {
             return {
                 ...state,
                 isAuthenticated: true,
-                loading: false,
                 user: payload,
             };
         case 'LOADING':
-            logout();
             return {
                 ...state,
                 loading: true,
             };
         case 'LOADED':
-            logout();
             return {
                 ...state,
                 loading: false,
@@ -38,6 +35,11 @@ const auth = (state, { type, payload }) => {
             return {
                 ...state,
                 buyerMode: false,
+            };
+        case 'SET_UNREAD_MESSAGES_COUNT':
+            return {
+                ...state,
+                unreadMessagesCount: payload,
             };
         default:
             return state;

@@ -16,8 +16,8 @@ import { default as Image } from '../../components/ImageWithFallback';
 import { BASE_URL } from '../../services/api.service';
 import { setUserContext } from '../../context/reducers/auth';
 import { BlurView } from 'expo-blur';
-import BUYER_OPTIONS from './BUYER_OPTIONS';
-import SELLER_OPTIONS from './SELLER_OPTIONS';
+import BUYER_OPTIONS from './buyer-options';
+import SELLER_OPTIONS from './seller-options';
 
 
 const ProfileScreen = ({ navigation }) => {
@@ -149,7 +149,7 @@ const ProfileScreen = ({ navigation }) => {
                             <TouchableOpacity
                                 key={index}
                                 style={[styles.optionButton]}
-                                onPress={() => option.onPress({ navigation, authDispatch })}
+                                onPress={() => option.onPress && option.onPress({ navigation, authDispatch })}
                             >
                                 {
                                     <option.component

@@ -24,7 +24,7 @@ const serviceValidationSchema = yup.object().shape({
     description: yup
         .string()
         .min(50, ({ min }) => `The description must be at least ${min} characters`)
-        .max(200, ({ max }) => `The description must be at most ${max} characters`)
+        .max(500, ({ max }) => `The description must be at most ${max} characters`)
         .required('The description is required'),
     price: yup
         .number()

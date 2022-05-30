@@ -1,13 +1,16 @@
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import * as React from 'react';
+import { useContext, useEffect } from 'react';
 import { GlobalContext } from '../context/Provider';
 import { LoadingScreen } from '../screens';
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
+import { subscribeToIncomingMessages, getUnreadMessagesCount } from '../services/chat.service';
 import AuthNavigator from './AuthNavigator';
 import BuyerNavigator from './BuyerNavigator';
 import SellerNavigator from './SellerNavigator';
+import Toast from 'react-native-toast-message';
+import { getUserById } from '../services/user.service';
 
 export default function Navigation({ colorScheme }) {
   return (
@@ -26,9 +29,26 @@ function RootNavigator() {
     authState: {
       isAuthenticated,
       loading,
-      buyerMode
-    }
-  } = React.useContext(GlobalContext);
+      buyerMode,
+      user
+    },
+    authDispatch
+  } = useContext(GlobalContext);
+
+  useEffect(() => {
+    if (!isAuthenticated) return;
+    subscribeToIncomingMessages(user.id, async (message) => {
+      const sender = await getUserById(message.ownerId);
+      Toast.show({
+        type: 'success',
+        text1: `${sender?.firstName} ${sender?.lastName}`,
+        text2: message.message,
+      });
+      const unreadMessagesCount = await getUnreadMessagesCount();
+      authDispatch({ type: 'SET_UNREAD_MESSAGES_COUNT', payload: unreadMessagesCount });
+    });
+  }, [isAuthenticated]);
+
   return (
     <Stack.Navigator
       screenOptions={{

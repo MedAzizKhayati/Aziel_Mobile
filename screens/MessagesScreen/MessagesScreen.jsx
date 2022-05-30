@@ -7,13 +7,13 @@ import Colors from '../../constants/Colors';
 import { GlobalContext } from '../../context/Provider';
 import useColorScheme from '../../hooks/useColorScheme';
 import { BASE_URL } from '../../services/api.service';
-import { findByChatId, markMessagesAsSeen, sendMessageToChat, subscribeToChat } from '../../services/chat.service';
+import { findByChatId, getUnreadMessagesCount, markMessagesAsSeen, sendMessageToChat, subscribeToChat } from '../../services/chat.service';
 import { formatURI } from '../../utils/helpers';
 
 import styles from './styles';
 
 const MessagesScreen = ({ route, navigation }) => {
-    const { authState: { user } } = useContext(GlobalContext);
+    const { authState: { user }, authDispatch } = useContext(GlobalContext);
     const colorScheme = useColorScheme();
     const [target, setTarget] = useState(route.params.target);
     const messageListRef = useRef()
@@ -46,7 +46,11 @@ const MessagesScreen = ({ route, navigation }) => {
                     ? user.id + '-' + target.id
                     : target.id + '-' + user.id;
             setChatId(chatId);
-            return init;
+            return async () => {
+                init();
+                const notRead = await getUnreadMessagesCount();
+                authDispatch({ type: 'SET_UNREAD_MESSAGES_COUNT', payload: notRead });
+            };
         }, [target])
     )
 

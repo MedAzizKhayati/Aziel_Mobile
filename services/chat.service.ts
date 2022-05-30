@@ -7,6 +7,14 @@ export const subscribeToChat = (chatId: string, callback: (data: {}) => void) =>
     });
 }
 
+export const subscribeToIncomingMessages = (userId: string, callback: (data: {}) => void) => {
+    chatSocket.offAny();
+    chatSocket.onAny((ev, data) => {
+        if(data?.targetId === userId)
+            callback && callback(data);
+    });
+}
+
 export const sendMessageToChat = (message: string, ownerId: string, targetId: string) => {
     chatSocket.emit('send', {
         message,
@@ -27,7 +35,7 @@ export const markMessagesAsSeen = async (messageIds: string[]) => {
     return response.data;
 }
 
-export const getUnreeadMessagesCount = async () => {
+export const getUnreadMessagesCount = async () => {
     const response = await axiosInstance.get(`/messages/unread-count/`);
     return response.data.count;
 }

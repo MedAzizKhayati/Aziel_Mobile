@@ -23,7 +23,7 @@ export const registerUser = async (payload: any): Promise<any> => {
         return (await axios.post(BASE_URL + '/user', payload)).data;
     } catch (error: any) {
         console.log(error.response.data);
-
+        throw error;
     }
 }
 
@@ -32,8 +32,8 @@ export const loginUser = async (payload: any): Promise<any> => {
     try {
         response = (await axios.post(BASE_URL + '/user/login', payload));
     } catch (err: any) {
-        console.log(err?.response?.data);
-        throw err?.response?.data;
+        // console.log(err?.response?.data);
+        throw err;
     }
     await setAuthTokens({
         accessToken: response.data.access_token,
@@ -52,7 +52,6 @@ export const updateUser = async (payload: any): Promise<any> => {
 
 export const updateProfilePicture = async (payload: any): Promise<any> => {
     return (await axiosInstance.post('/user/upload', payload)).data;
-    //return (await axiosInstance.post('/services/upload-image/0', payload)).data;
 }
 
 export const logout = () => {
@@ -64,3 +63,8 @@ export const logout = () => {
         }
     });
 };
+
+
+export const getUserById = async (id: string): Promise<any> => {
+    return (await axiosInstance.get('/user/' + id)).data;
+}

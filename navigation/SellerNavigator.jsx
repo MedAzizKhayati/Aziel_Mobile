@@ -6,19 +6,12 @@ import { GlobalContext } from "../context/Provider";
 import useColorScheme from "../hooks/useColorScheme";
 import { ProfileScreen, SettingsScreen, ServicesScreen, EditProfileScreen, ServiceDetailsScreen, OrderDetailsScreen, MessagesScreen, InboxScreen, MyServicesScreen, HomeScreenSeller, CreateServiceScreen, EditServiceScreen } from "../screens";
 import ModalScreen from "../screens/ModalScreen";
-import { getUnreeadMessagesCount } from "../services/chat.service";
 
 const BottomTab = createBottomTabNavigator();
 
 export default () => {
     const colorScheme = useColorScheme();
-    const [unreadCount, setUnreadCount] = useState(0);
-    const { authState: { user }, authDispatch } = useContext(GlobalContext);
-
-    useEffect(async () => {
-        const count = await getUnreeadMessagesCount(user.id);
-        setUnreadCount(count);
-    });
+    const { authState: { user, unreadMessagesCount }, authDispatch } = useContext(GlobalContext);
 
     return (
         <BottomTab.Navigator
@@ -51,7 +44,7 @@ export default () => {
                 options={{
                     title: 'Inbox',
                     tabBarIcon: ({ color }) => <Entypo size={30} name="message" color={color} />,
-                    tabBarBadge: unreadCount > 0 ? unreadCount : null,
+                    tabBarBadge: unreadMessagesCount > 0 ? unreadMessagesCount : null,
                 }}
             />
             <BottomTab.Screen
