@@ -1,3 +1,4 @@
+import { AntDesign } from '@expo/vector-icons';
 import { useFocusEffect, useIsFocused } from '@react-navigation/native';
 import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { ActivityIndicator, FlatList, ToastAndroid, TouchableOpacity } from 'react-native';
@@ -13,7 +14,7 @@ import { formatURI } from '../../utils/helpers';
 import styles from './styles';
 
 const MessagesScreen = ({ route, navigation }) => {
-    const { authState: { user }, authDispatch } = useContext(GlobalContext);
+    const { authState: { user, buyerMode }, authDispatch } = useContext(GlobalContext);
     const colorScheme = useColorScheme();
     const [target, setTarget] = useState(route.params.target);
     const messageListRef = useRef()
@@ -62,7 +63,7 @@ const MessagesScreen = ({ route, navigation }) => {
     useEffect(() => {
         if (!chatId || !isFocused) return;
         subscribeToChat(chatId, (data) => {
-            if(data.targetId == user.id)
+            if (data.targetId == user.id)
                 markMessagesAsSeen([data.id]);
             setMessages(messages => [data, ...messages]);
             setLimit(limit => limit + 1);
@@ -104,7 +105,7 @@ const MessagesScreen = ({ route, navigation }) => {
             return <ActivityIndicator size="large" color={Colors[colorScheme].text} />
         return (
             <View style={styles.headerComponent}>
-                <Image source={{uri: formatURI(target?.profileImage)}} style={styles.userPhoto} />
+                <Image source={{ uri: formatURI(target?.profileImage) }} style={styles.userPhoto} />
                 <Text style={styles.userName}>
                     {target?.firstName + ' ' + target?.lastName}
                 </Text>
@@ -148,6 +149,19 @@ const MessagesScreen = ({ route, navigation }) => {
                 />
             </View>
             <View style={[styles.messageBox, { backgroundColor: Colors[colorScheme].secondaryBackground }]}>
+                {
+                    !buyerMode &&
+                    <TouchableOpacity
+                        style={{paddingRight: 5}}
+                        onPress={sendMessage}
+                    >
+                        <AntDesign
+                            name='plus'
+                            size={30}
+                            color={Colors[colorScheme].text}
+                        />
+                    </TouchableOpacity>
+                }
                 <TextInput
                     style={[styles.messageInput, { borderColor: Colors[colorScheme].tint }]}
                     onChange={(e) => setMessage(e.nativeEvent.text)}

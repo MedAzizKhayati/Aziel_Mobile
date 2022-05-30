@@ -11,7 +11,7 @@ export default StyleSheet.create({
         flexDirection: "row",
         height: 65,
         padding: 10,
-
+        alignItems: "center"
     },
     messageBoxText: {
         flex: 1,

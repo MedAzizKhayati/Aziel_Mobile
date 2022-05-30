@@ -1,32 +1,31 @@
-import { useContext} from 'react';
+import { useContext } from 'react';
 import { GlobalContext } from '../../context/Provider';
 import useColorScheme from '../../hooks/useColorScheme';
 import { ScrollView, Text, View, TextInput } from '../../components/Themed';
-import { Image, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
+import Image from '../../components/ImageWithFallback';
 import Feather from 'react-native-vector-icons/Feather';
 import { FontAwesome } from '@expo/vector-icons';
 import Colors from '../../constants/Colors';
 import 'react-native-gesture-handler';
 import styles from './styles';
+import { formatURI } from '../../utils/helpers';
 
 
 const EditProfileScreen = ({ navigation }) => {
   const { authState, authDispatch } = useContext(GlobalContext);
   const colorScheme = useColorScheme();
-  const getRandomImageURI = () => "https://picsum.photos/" + (Math.random() * (100) + 200).toFixed(0);
   return (
     <ScrollView style={styles?.container}>
       <View style={styles?.viewContainer}>
         <View style={{ alignItems: 'center' }}>
-          <TouchableOpacity onPress={() => this.bs.current.snapTo(0)} >
-            <View style={styles?.imageContainer}>
-              <Image
-                source={{ uri: getRandomImageURI() }}
-                style={styles.photo}
-                imageStyle={{ borderRadius: 15 }}>
-              </Image>
-            </View>
-          </TouchableOpacity>
+          <View style={styles?.imageContainer}>
+            <Image
+              source={{ uri: formatURI(authState.user.profileImage) }}
+              style={styles.photo}
+              imageStyle={{ borderRadius: 15 }}>
+            </Image>
+          </View>
           <Text style={styles.user}>
             {authState.user?.firstName + " " + authState.user?.lastName}
           </Text>

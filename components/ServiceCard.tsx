@@ -4,6 +4,7 @@ import { StyleSheet, TouchableOpacity } from "react-native";
 import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
 import { BASE_URL } from "../services/api.service";
+import { formatURI } from "../utils/helpers";
 import { default as Image } from "./ImageWithFallback";
 import { Text, View } from "./Themed";
 
@@ -19,9 +20,9 @@ const ServiceCard = ({ service, onPress }: ServiceProps) => {
             style={[styles.cardView, { backgroundColor: Colors[colorScheme].secondaryBackground }]}
             onPress={onPress}
         >
-            <Image source={{ uri: BASE_URL + (service.imagePath || '') }} style={styles.serviceImage} />
+            <Image source={{ uri: formatURI(service.imagePath) }} style={styles.serviceImage} />
             <View style={[styles.userInfo, { backgroundColor: Colors[colorScheme].secondaryBackground }]}>
-                <Image style={styles.userPicture} source={{ uri: BASE_URL + (service.user.image || '') }} />
+                <Image style={styles.userPicture} source={{ uri: formatURI(service.user.profileImage) }} />
                 <Text>{`${service.user.firstName} ${service.user.lastName}`}</Text>
             </View>
             <Text style={styles.serviceTitle}>{service.title}</Text>
