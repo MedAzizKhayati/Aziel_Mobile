@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from 'react';
 import { FlatList, ToastAndroid } from 'react-native';
 import { OrderCard } from '../../components/OrderCard';
-import {  Text, View } from '../../components/Themed';
+import { Text, View } from '../../components/Themed';
 import { GlobalContext } from '../../context/Provider';
 import useColorScheme from '../../hooks/useColorScheme';
-import { getOrdersByUser } from '../../services/orders.service';
+import { getAllOrders } from '../../services/orders.service';
 import styles from './styles';
 
 const OrdersScreen = ({ navigation }) => {
@@ -18,8 +18,7 @@ const OrdersScreen = ({ navigation }) => {
           <FlatList
             showsVerticalScrollIndicator={false}
             data={orders}
-            renderItem={({ item }) => <OrderCard item={item} />
-            }
+            renderItem={({ item }) => <OrderCard order={item} />}
             keyExtractor={item => item.id}
           />
         </View>
@@ -27,18 +26,18 @@ const OrdersScreen = ({ navigation }) => {
     )
   }
   useEffect(() => {
-    getOrdersByUser()
+    getAllOrders()
       .then(orders => setOrders(orders))
       .catch(err => ToastAndroid.show(err.response.data.message, ToastAndroid.SHORT));
   }, []);
   if (orders.length > 0) {
-  return orderView
-  }else{
-   return(
-  <View>
-    <Text>No orders Yet</Text>
-  </View>
-   );
+    return orderView()
+  } else {
+    return (
+      <View style={{ fles: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <Text style={{ fontSize: 25, fontWeight: '700' }} > No orders Yet !</Text>
+      </View>
+    );
   }
 
 }

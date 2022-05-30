@@ -8,22 +8,16 @@ const styles = StyleSheet.create({
         height: 400,
         borderBottomRightRadius: 5,
         borderBottomLeftRadius: 5,
-        //borderTopLeftRadius: 20,
-        //borderTopRightRadius: 20,
         overflow: 'hidden',
     },
     firstView: {
         width: '100%',
-        //flexDirection: 'row',
         paddingTop: 16,
         paddingHorizontal: 16,
-       // justifyContent: 'space-between',
-       // alignItems: 'center',
     },
     header: {
         marginTop: 40,
         marginHorizontal: 20,
-        //flexDirection: 'row',
     },
     btn: {
         height: 55,
