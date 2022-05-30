@@ -10,9 +10,13 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
     },
-    footer: { flex: 2, justifyContent: 'center', paddingLeft: 10, paddingRight: 10 },
+    footer: {
+        flex: 2,
+        justifyContent: 'center',
+        paddingLeft: 10,
+        paddingRight: 10
+    },
     amountDetails: {
-       // display: 'flex',
         flexDirection: "row",
         justifyContent: "space-between",
         paddingLeft: 20,
@@ -27,6 +31,6 @@ const styles = StyleSheet.create({
         marginHorizontal: 20,
         borderRadius: 10,
     },
-})
+});
 
 export default styles;

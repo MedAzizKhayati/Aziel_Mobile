@@ -1,33 +1,18 @@
-import { Modal, Dimensions, TouchableWithoutFeedback, StyleSheet, View,useColorScheme } from 'react-native'
-import React, { useState } from 'react'
-
-const deviceHeight = Dimensions.get('window').height;
+import { Modal, TouchableWithoutFeedback, StyleSheet, View } from 'react-native';
+import Colors from '../constants/Colors';
+import useColorScheme from '../hooks/useColorScheme';
 interface BottomPopupProps {
-    ref: any;
     onTouchOutside: () => void;
+    visible: boolean;
 }
-const BottomPopup = ({ ref, onTouchOutside }: BottomPopupProps) => {
+
+const BottomPopup = ({ onTouchOutside, visible }: BottomPopupProps) => {
     const colorScheme = useColorScheme();
-    const [state, setState] = useState( false );
 
-    const show = () => {
-        setState( true )
-    }
-    const close = () => {
-        setState( false )
-    }
-
-    const RenderOutsideTouchable = ({ onTouch } : { onTouch: (event: any) => void }
-    ) => {
-        if (!onTouch)
-            return (
-                <View style={{ flex: 1, width: '100%' }}>
-                </View>
-            )
-
+    const RenderOutsideTouchable = ({ onTouch }: { onTouch: () => void }) => {
         return (
-            <TouchableWithoutFeedback onPress={onTouch} style={{ flex: 1, width: '100%' }}>
-                <View style={{ flex: 1, width: '100%' }}>
+            <TouchableWithoutFeedback onPress={() => onTouch && onTouch()} style={{ flex: 1, width: '100%' }}>
+                <View style={{ flex: 5, width: '100%' }}>
                 </View>
             </TouchableWithoutFeedback>
         )
@@ -35,28 +20,28 @@ const BottomPopup = ({ ref, onTouchOutside }: BottomPopupProps) => {
 
     return (
         <Modal
-            animationType={"fade"}
+            animationType="slide"
             transparent={true}
-            visible={state}
-            onRequestClose={close}>
+            visible={visible}
+        >
             <View style={{ flex: 1, justifyContent: 'flex-end' }}>
-            <RenderOutsideTouchable onTouch={onTouchOutside} />
+                <RenderOutsideTouchable onTouch={onTouchOutside} />
                 <View style={{
-                    backgroundColor: 'white',
+                    flex: 10,
+                    backgroundColor: Colors[colorScheme].secondaryBackground,
                     width: '100%',
                     borderTopRightRadius: 10,
                     borderTopLeftRadius: 10,
                     paddingHorizontal: 10,
-                    maxHeight: deviceHeight * 0.4,
                 }}>
                 </View>
             </View>
         </Modal>
-
     )
 }
 const styles = StyleSheet.create({
-    
+
 });
+
 export default BottomPopup;
 

@@ -1,28 +1,29 @@
-import React, { useState, useEffect, useContext, createRef } from 'react';
-import {
-    TouchableOpacity,
-    Image,
-} from 'react-native';
+import React, { useState, useEffect, useContext } from 'react';
+import { TouchableOpacity } from 'react-native';
 import Colors from '../../constants/Colors';
 import { GlobalContext } from '../../context/Provider';
 import { ScrollView, Text, View, TextInput } from '../../components/Themed';
 import styles from '../OrderDetailsScreen/styles';
 import useColorScheme from '../../hooks/useColorScheme';
-import {BottomPopup} from '../../components/bottomPopup'
+import BottomPopup from '../../components/BottomPopup';
+import Image from '../../components/ImageWithFallback';
 
 const OrderDetailsScreen = ({ navigation, route }) => {
-
     const item = route.params;
-    const { authState, authDispatch } = useContext(GlobalContext);
+    const {
+        authState: {
+            user
+        }
+    } = useContext(GlobalContext);
     const colorScheme = useColorScheme();
-    const getRandomImageURI = () => "https://picsum.photos/" + (Math.random() * (100) + 200).toFixed(0);
-     let popupRef = React.createRef();
-     const onShowPopup =()=>{
-    //    popupRef.show();
-     }
-    const onClosePopup=()=>{
-       popupRef.close();
-     }
+    const [isVisible, setIsVisible] = useState(false);
+
+    const onShowPopup = () => {
+        setIsVisible(true);
+    }
+    const onClosePopup = () => {
+        setIsVisible(false);
+    }
 
     return (
         <View
@@ -48,7 +49,6 @@ const OrderDetailsScreen = ({ navigation, route }) => {
                                 marginRight: 22,
                             }}>
                             <Image
-                                source={{ uri: getRandomImageURI() }}
                                 style={{
                                     width: '150%',
                                     height: '150%',
@@ -202,11 +202,11 @@ const OrderDetailsScreen = ({ navigation, route }) => {
                         Order Now
                     </Text>
                 </TouchableOpacity>
-                <BottomPopup
-                ref={(target) => popupRef = target}
-                onTouchOutside={onClosePopup}
-                />
             </View>
+            <BottomPopup
+                onTouchOutside={onClosePopup}
+                visible={isVisible}
+            />
         </View>
     );
 };
