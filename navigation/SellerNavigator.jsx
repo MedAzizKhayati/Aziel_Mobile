@@ -4,8 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import Colors from "../constants/Colors";
 import { GlobalContext } from "../context/Provider";
 import useColorScheme from "../hooks/useColorScheme";
-import { ProfileScreen, SettingsScreen, ServicesScreen, EditProfileScreen, ServiceDetailsScreen, OrderDetailsScreen, MessagesScreen, InboxScreen, MyServicesScreen, HomeScreenSeller, CreateServiceScreen, EditServiceScreen } from "../screens";
-import ModalScreen from "../screens/ModalScreen";
+import { ProfileScreen, SettingsScreen, ServicesScreen, EditProfileScreen, ServiceDetailsScreen, OrderDetailsScreen, MessagesScreen, InboxScreen, MyServicesScreen, HomeScreenSeller, CreateServiceScreen, EditServiceScreen, OrdersScreen, SellerOrderScreen } from "../screens";
 
 const BottomTab = createBottomTabNavigator();
 
@@ -32,7 +31,7 @@ export default () => {
             />
             <BottomTab.Screen
                 name="Orders"
-                component={ModalScreen}
+                component={OrdersScreen}
                 options={{
                     title: 'Orders',
                     tabBarIcon: ({ color }) => <TabBarIcon name="bars" color={color} />,
@@ -127,6 +126,14 @@ export default () => {
             <BottomTab.Screen
                 name="CreateServiceScreen"
                 component={CreateServiceScreen}
+                options={{
+                    title: 'Create Service',
+                    tabBarButton: () => null,
+                }}
+            />
+            <BottomTab.Screen
+                name="SellerOrderScreen"
+                component={SellerOrderScreen}
                 options={{
                     title: 'Create Service',
                     tabBarButton: () => null,

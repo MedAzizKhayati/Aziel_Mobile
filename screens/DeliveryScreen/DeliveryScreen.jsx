@@ -1,20 +1,21 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { TouchableOpacity, Image } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { Text, View } from '../../components/Themed';
 import Colors from '../../constants/Colors';
 import { GlobalContext } from '../../context/Provider';
 import useColorScheme from '../../hooks/useColorScheme';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import styles from './styles';
 import { ScrollView } from 'react-native-gesture-handler';
 import { useIsFocused } from '@react-navigation/native';
 import { formatDate } from '../../utils/helpers';
+import styles from './styles';
 
-const track_order_status = [
-    { title: 'Order Confirmed', sub_title: 'Your order has been received' },
-    { title: 'Order in Progress', sub_title: 'Your order is on the way.' },
-    { title: 'Order Delivered', sub_title: 'Your order has been delivered.' },
-    { title: 'Rate me', sub_title: 'Help me improve my service.' }
+
+const trackOrderStatus = [
+    { title: 'Order Confirmed', subTitle: 'Your order has been received' },
+    { title: 'Order in Progress', subTitle: 'Your order is on the way.' },
+    { title: 'Order Delivered', subTitle: 'Your order has been delivered.' },
+    { title: 'Rate Experience', subTitle: 'Help me improve my service.' }
 ];
 
 const statusToStep = {
@@ -23,6 +24,7 @@ const statusToStep = {
     'COMPLETED': 3,
     'CANCELLED': 0,
     'REJECTED': 0,
+    'RATED': 4
 }
 
 export default function DeliveryScreen({ navigation, route }) {
@@ -69,7 +71,7 @@ export default function DeliveryScreen({ navigation, route }) {
             <ScrollView>
 
                 <View style={{ marginTop: 20, paddingHorizontal: 10 }}>
-                    {track_order_status.map((item, index) => (
+                    {trackOrderStatus.map((item, index) => (
                         <View
                             key={item.title}
                         >
@@ -81,10 +83,10 @@ export default function DeliveryScreen({ navigation, route }) {
                                 />
                                 <View style={{ marginLeft: 5 }}>
                                     <Text style={{ fontSize: 20, fontWeight: 'bold' }}>{item.title}</Text>
-                                    <Text style={{ fontSize: 18, height: 30, color: Colors[colorScheme].tertiaryBackground }}>{item.sub_title}</Text>
+                                    <Text style={{ fontSize: 18, height: 30, color: Colors[colorScheme].tertiaryBackground }}>{item.subTitle}</Text>
                                 </View>
                             </View>
-                            {index < track_order_status.length - 1
+                            {index < trackOrderStatus.length - 1
                                 &&
                                 <View>
                                     {index < currentStep &&

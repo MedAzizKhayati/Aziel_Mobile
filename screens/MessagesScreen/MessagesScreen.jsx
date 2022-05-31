@@ -267,7 +267,7 @@ const MessagesScreen = ({ route, navigation }) => {
                                         />
                                     }
                                     {
-                                        item.customOrder.status == 'COMPLETED' &&
+                                        ['COMPLETED', 'RATED'].includes(item.customOrder.status) &&
                                         <OrderButton
                                             text="Offer Delivered"
                                             backgroundColor="green"

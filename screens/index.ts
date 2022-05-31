@@ -20,9 +20,9 @@ export { default as LoadingScreen } from "./LoadingScreen/LoadingScreen";
 
 export { default as MessagesScreen } from "./MessagesScreen/MessagesScreen";
 
-export {default as InboxScreen} from "./InboxScreen/InboxScreen";
+export { default as InboxScreen } from "./InboxScreen/InboxScreen";
 
-export{default as OrdersScreen} from "./OrdersScreen/OrdersScreen";
+export { default as OrdersScreen } from "./OrdersScreen/OrdersScreen";
 
 export { default as MyServicesScreen } from "./MyServicesScreen/MyServicesScreen";
 
@@ -34,8 +34,6 @@ export { default as EditServiceScreen } from "./EditServiceScreen/EditServiceScr
 
 export { default as SuccessScreen } from "./SuccessScreen/SuccessScreen";
 
-export{default as DeliveryScreen} from "./DeliveryScreen/DeliveryScreen";
+export { default as DeliveryScreen } from "./DeliveryScreen/DeliveryScreen";
 
-
-
-
+export { default as SellerOrderScreen } from "./SellerOrderScreen/SellerOrderScreen";
