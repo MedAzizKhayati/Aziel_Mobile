@@ -1,15 +1,31 @@
 import useColorScheme from '../../hooks/useColorScheme';
+import React, { useState, useContext, useEffect } from 'react';
 import { ScrollView, Text, View } from '../../components/Themed';
 import { TouchableOpacity, ImageBackground } from 'react-native';
 import Colors from '../../constants/Colors';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from './styles';
 import { default as Image } from '../../components/ImageWithFallback';
 import { BASE_URL } from '../../services/api.service';
+import RatingStars from '../../components/RatingStars';
+import UserInformations from '../../components/UserInformations';
+
 
 const ServiceDetailsScreen = ({ navigation, route }) => {
     const service = route.params.service;
     const colorScheme = useColorScheme();
+    const [isVisible, setIsVisible] = useState(false);
+
+     const formatURI = (uri) => {
+        return BASE_URL + (uri?.split('\\').join('/') || '');
+    }
+    
+    const onShowPopup = () => {
+        setIsVisible(true);
+    }
+    const onClosePopup = () => {
+        setIsVisible(false);
+    }
+    console.log(service);
     return (
         <ScrollView
             showsVerticalScrollIndicator={false}
@@ -23,6 +39,10 @@ const ServiceDetailsScreen = ({ navigation, route }) => {
             />
             <View>
                 <View style={{ marginTop: 20, paddingHorizontal: 20 }}>
+                    <TouchableOpacity style={[styles.userInfo]} onPress={onShowPopup}>
+                        <Image style={styles.userPicture} source={{ uri: formatURI(service.user.profileImage) }} />
+                        <Text style={styles.userName}>{`${service.user.firstName} ${service.user.lastName}`}</Text>
+                    </TouchableOpacity>
                     <Text style={{ fontSize: 20, fontWeight: 'bold' }}>{service.title}</Text>
                     <Text
                         style={{
@@ -31,7 +51,7 @@ const ServiceDetailsScreen = ({ navigation, route }) => {
                             color: Colors[colorScheme].tint,
                             marginTop: 5,
                         }}>
-                        IT Domain
+                        {service?.category?.title}
                     </Text>
                     <View
                         style={{
@@ -41,18 +61,15 @@ const ServiceDetailsScreen = ({ navigation, route }) => {
                             alignservices: 'center'
                         }}>
                         <View style={{ flexDirection: 'row', alignservices: 'center' }}>
-                            <View style={{ flexDirection: 'row' }}>
-                                <Icon name="star" size={20} color="#FFA500" />
-                                <Icon name="star" size={20} color="#FFA500" />
-                                <Icon name="star" size={20} color="#FFA500" />
-                                <Icon name="star" size={20} color="#FFA500" />
-                                <Icon name="star" size={20} color="#808080" />
-                            </View>
+                            <RatingStars
+                                rating={service.rating}
+                                size={20}
+                            />
                             <Text style={{ fontWeight: 'bold', fontSize: 18, marginLeft: 5 }}>
                                 {service.rating}
                             </Text>
                         </View>
-                        <Text style={{ fontSize: 13, color: Colors[colorScheme].tint }}>{service.reviews} Reviews</Text>
+                        <Text style={{ fontSize: 13,fontWeight:'bold', color: Colors[colorScheme].tint }}>{service.reviewsCount} Reviews</Text>
                     </View>
                     <View style={{ marginTop: 20 }}>
                         <Text style={{ lineHeight: 20, color: Colors[colorScheme].tint }}>
@@ -92,6 +109,12 @@ const ServiceDetailsScreen = ({ navigation, route }) => {
                         Book Now
                     </Text>
                 </TouchableOpacity>
+                <UserInformations
+                onTouchOutside={onClosePopup}
+                visible={isVisible}
+                navigation={navigation}
+                User={service.user}
+            />
             </View>
         </ScrollView>
     )

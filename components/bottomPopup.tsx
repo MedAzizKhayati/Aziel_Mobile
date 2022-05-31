@@ -175,7 +175,8 @@ const styles = StyleSheet.create({
     optionText: {
         fontSize: 16,
         fontWeight: 'bold',
-    }
+    },
+    
 });
 
 export default BottomPopup;
