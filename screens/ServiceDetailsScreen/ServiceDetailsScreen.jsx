@@ -1,4 +1,5 @@
 import useColorScheme from '../../hooks/useColorScheme';
+import React, { useState, useContext, useEffect } from 'react';
 import { ScrollView, Text, View } from '../../components/Themed';
 import { TouchableOpacity, ImageBackground } from 'react-native';
 import Colors from '../../constants/Colors';
@@ -6,13 +7,23 @@ import styles from './styles';
 import { default as Image } from '../../components/ImageWithFallback';
 import { BASE_URL } from '../../services/api.service';
 import RatingStars from '../../components/RatingStars';
+import UserInformations from '../../components/UserInformations';
 
 
 const ServiceDetailsScreen = ({ navigation, route }) => {
     const service = route.params.service;
     const colorScheme = useColorScheme();
+    const [isVisible, setIsVisible] = useState(false);
+
      const formatURI = (uri) => {
         return BASE_URL + (uri?.split('\\').join('/') || '');
+    }
+    
+    const onShowPopup = () => {
+        setIsVisible(true);
+    }
+    const onClosePopup = () => {
+        setIsVisible(false);
     }
     console.log(service);
     return (
@@ -28,10 +39,10 @@ const ServiceDetailsScreen = ({ navigation, route }) => {
             />
             <View>
                 <View style={{ marginTop: 20, paddingHorizontal: 20 }}>
-                    <View style={[styles.userInfo]}>
+                    <TouchableOpacity style={[styles.userInfo]} onPress={onShowPopup}>
                         <Image style={styles.userPicture} source={{ uri: formatURI(service.user.profileImage) }} />
                         <Text style={styles.userName}>{`${service.user.firstName} ${service.user.lastName}`}</Text>
-                    </View>
+                    </TouchableOpacity>
                     <Text style={{ fontSize: 20, fontWeight: 'bold' }}>{service.title}</Text>
                     <Text
                         style={{
@@ -98,6 +109,12 @@ const ServiceDetailsScreen = ({ navigation, route }) => {
                         Book Now
                     </Text>
                 </TouchableOpacity>
+                <UserInformations
+                onTouchOutside={onClosePopup}
+                visible={isVisible}
+                navigation={navigation}
+                User={service.user}
+            />
             </View>
         </ScrollView>
     )

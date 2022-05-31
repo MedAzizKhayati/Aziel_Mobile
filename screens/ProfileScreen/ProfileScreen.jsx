@@ -92,7 +92,7 @@ const ProfileScreen = ({ navigation }) => {
                 <BlurView
                     style={styles.modalContainer}
                     intensity={100}
-                    tint="dark"
+                    tint={colorScheme}
                 >
                     <Image
                         style={styles.photoModal}

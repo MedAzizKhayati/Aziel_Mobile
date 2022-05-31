@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import { StyleSheet, View, Text, TouchableOpacity, Image, Dimensions, useColorScheme } from 'react-native'
+import { StyleSheet, TouchableOpacity } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import useColorScheme from '../hooks/useColorScheme';
+import Colors from '../constants/Colors';
+import { Text, View } from './Themed';
 interface OrderProps {
     order: any;
-    navigation: any;
+    onPay: () => void;
 }
-const OrderCard = ({ order , navigation }: OrderProps) => {
+const OrderCard = ({ order, onPay }: OrderProps) => {
     const colorScheme = useColorScheme();
     const [status, setStatus] = useState(order.status);
     const [statusIcon, setStatusIcon] = useState("progress-clock");
-    const [statusMessage, setStatusMessage] = useState('IN PROGRESS')
+    const [statusMessage, setStatusMessage] = useState('IN PROGRESS');
 
     useEffect(() => {
         if (status === 'IN_PROGRESS') {
@@ -25,61 +28,82 @@ const OrderCard = ({ order , navigation }: OrderProps) => {
     }, [status]);
 
     return (
-        <TouchableOpacity style={styles.container} onPress={() => navigation.navigate("DeliveryScreen", {order: order})}>
-            <View style={styles.details_container}>
-                <View style={styles.infos}>
-                    <Text style={{ fontSize: 22, fontWeight: 'bold' }}>Order ID # {order.id}</Text>
-                    <Text style={{ fontSize: 16, fontWeight: '600', color: '#1C1C1C' }}>{new Date(order.createdAt).toLocaleDateString("en-US")}</Text>
-                    <Text style={{ fontSize: 24, fontWeight: '700', color: 'orange' }}>{order.total} TND</Text>
+        <TouchableOpacity
+            style={styles.container}
+            onPress={onPay}
+        >
+            <View
+                style={styles.details_container}
+                lightColor={Colors[colorScheme].secondaryBackground}
+                darkColor={Colors[colorScheme].secondaryBackground}
+            >
+                <View
+                    style={styles.infos}
+                    lightColor={Colors[colorScheme].secondaryBackground}
+                    darkColor={Colors[colorScheme].secondaryBackground}
+                >
+                    <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Order ID # </Text>
+                    <Text style={{ fontSize: 12 }}>{order.id}</Text>
+                    <Text style={{ fontSize: 24, fontWeight: '700', color: 'yellow' }}>{order.total} TND</Text>
                 </View>
-                <View style={styles.image_container}>
+                <View
+                    style={styles.image_container}
+                    lightColor={Colors[colorScheme].secondaryBackground}
+                    darkColor={Colors[colorScheme].secondaryBackground}
+                >
                     <MaterialCommunityIcons
                         name={statusIcon}
                         size={40}
-                        color="black"
+                        color={Colors[colorScheme].text}
                     />
-                    <Text style={{ fontSize: 12, color: '#1C1C1C' }}>{statusMessage}</Text>
+                    <Text style={{ paddingTop: 5, fontSize: 12, color: Colors[colorScheme].tint }}>
+                        {statusMessage}
+                    </Text>
+                    <Text
+                        style={{
+                            paddingVertical: 5,
+                            fontSize: 14,
+                            fontWeight: '600',
+                            color: Colors[colorScheme].tint,
+                            textAlign: 'center',
+                        }}>
+                        Due to {new Date(order.createdAt).toLocaleDateString("en-US")}
+                    </Text>
                 </View>
             </View>
-        </TouchableOpacity>
+        </TouchableOpacity >
     );
 }
 
 const styles = StyleSheet.create({
     image_container: {
-        display: "flex",
-        flex: 3,
+        flex: 1,
         padding: 5,
         alignItems: 'center',
         justifyContent: 'center'
     },
     container: {
-        display: 'flex',
         flex: 1,
-        width: Dimensions.get('screen').width - 20,
         margin: 10,
         borderRadius: 20,
-        backgroundColor: '#DCDCDC',
-        height: 100,
         justifyContent: 'flex-start',
         borderWidth: 1,
-        borderColor: 'grey',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        overflow: 'hidden'
     },
     details_container: {
-        display: "flex",
+        width: "100%",
         flex: 1,
         flexDirection: "row",
-        justifyContent: "space-around"
+        justifyContent: "space-between",
     },
     infos: {
-        display: "flex",
-        flex: 8,
+        flex: 3,
         padding: 5,
         marginTop: 5,
         paddingLeft: 20,
         justifyContent: "space-around",
     }
-})
+});
 
-export { OrderCard }
+export default OrderCard;

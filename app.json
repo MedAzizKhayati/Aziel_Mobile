@@ -4,7 +4,7 @@
     "slug": "Aziel_Mobile",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/aziel_icon.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {
@@ -27,6 +27,9 @@
         "backgroundColor": "#ffffff"
       }
     },
+    "notification":{
+      "icon": "./assets/images/aziel_icon.png"
+    },
     "web": {
       "favicon": "./assets/images/favicon.png"
     },
@@ -35,6 +38,13 @@
         "expo-image-picker",
         {
           "photosPermission": "The app accesses your photos."
+        }
+      ],
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/images/aziel_icon.png",
+          "color": "#ff0000"
         }
       ]
     ]

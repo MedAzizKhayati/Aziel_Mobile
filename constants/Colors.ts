@@ -21,5 +21,7 @@ export default {
     tabIconDefault: '#ccc',
     tabIconSelected: tintColorDark,
     btn:'orange',
+    tertiaryBackground: 'grey',
+    borderColor:'#DCDCDC'
   },
 };

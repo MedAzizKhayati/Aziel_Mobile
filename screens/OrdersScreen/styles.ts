@@ -3,7 +3,11 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
-    body: { flex: 9, justifyContent: 'center', alignItems: 'center' },
+    body: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
 })
 
 export default styles;

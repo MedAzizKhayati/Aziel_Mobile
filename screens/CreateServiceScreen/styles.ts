@@ -41,36 +41,4 @@ export default StyleSheet.create({
         borderRadius: 5,
         marginHorizontal: 10,
     },
-    dropdown: {
-        flex: 1,
-        width: "100%",
-        height: 50,
-        borderRadius: 7,
-        padding: 12,
-    },
-    dropdownContainer: {
-        borderRadius: 7,
-        borderWidth: 0,
-    },
-    item: {
-        padding: 17,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        borderWidth: 0,
-    },
-    textItem: {
-        flex: 1,
-        fontSize: 16,
-    },
-    placeholderStyle: {
-        fontSize: 16,
-    },
-    selectedTextStyle: {
-        fontSize: 16,
-    },
-    inputSearchStyle: {
-        height: 40,
-        fontSize: 16,
-    },
 });

@@ -1,4 +1,5 @@
-import { AntDesign, FontAwesome, FontAwesome5 } from "@expo/vector-icons";
+import { AntDesign, FontAwesome, FontAwesome5, MaterialIcons } from "@expo/vector-icons";
+import { getTestNotification } from "../../services/user.service";
 
 export default [
     {
@@ -25,6 +26,12 @@ export default [
         title: "Rewards",
         icon: "gift",
         component: FontAwesome
+    },
+    {
+        title: "Test Notification",
+        icon: 'notifications-active',
+        component: MaterialIcons,
+        onPress: getTestNotification
     },
     {
         title: "Logout",

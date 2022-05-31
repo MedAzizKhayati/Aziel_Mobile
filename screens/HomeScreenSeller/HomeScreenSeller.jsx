@@ -41,7 +41,7 @@ const ProfileScreenSeller = ({ navigation }) => {
                     nestedScrollEnabled
                     data={services}
                     showsHorizontalScrollIndicator={false}
-                    keyExtractor={item => item.title}
+                    keyExtractor={item => item.id}
                     renderItem={({ item }) =>
                         <ServiceCard
                             service={item}

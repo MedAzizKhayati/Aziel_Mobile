@@ -10,7 +10,7 @@ export const subscribeToChat = (chatId: string, callback: (data: {}) => void) =>
 export const subscribeToIncomingMessages = (userId: string, callback: (data: {}) => void) => {
     chatSocket.offAny();
     chatSocket.onAny((ev, data) => {
-        if(data?.targetId === userId)
+        if (data?.targetId === userId)
             callback && callback(data);
     });
 }
@@ -20,6 +20,30 @@ export const sendMessageToChat = (message: string, ownerId: string, targetId: st
         message,
         targetId,
         ownerId
+    });
+}
+
+export const sendCustomOrder = (customOrder: {}, ownerId: string, targetId: string) => {
+    chatSocket.emit('send', {
+        message: "CUSTOM OFFER",
+        customOrder,
+        targetId,
+        ownerId
+    });
+}
+
+export const changeOrderStatus = (orderId: string, status: string, chatId: string) => {
+    chatSocket.emit(`setOrderStatus`, {
+        orderId,
+        status,
+        chatId
+    });
+}
+
+export const acceptOrder = (orderId: string, chatId: string) => {
+    chatSocket.emit(`acceptOrder`, {
+        orderId,
+        chatId
     });
 }
 
