@@ -1,6 +1,6 @@
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { GlobalContext } from '../context/Provider';
 import { LoadingScreen } from '../screens';
 import ModalScreen from '../screens/ModalScreen';
@@ -10,7 +10,9 @@ import AuthNavigator from './AuthNavigator';
 import BuyerNavigator from './BuyerNavigator';
 import SellerNavigator from './SellerNavigator';
 import Toast from 'react-native-toast-message';
-import { getUserById } from '../services/user.service';
+import { getTestNotification, getUserById, registerNotificationToken } from '../services/user.service';
+import * as Notifications from 'expo-notifications';
+import { registerForPushNotificationsAsync, schedulePushNotification } from '../utils/helpers';
 
 export default function Navigation({ colorScheme }) {
   return (
@@ -48,6 +50,37 @@ function RootNavigator() {
       authDispatch({ type: 'SET_UNREAD_MESSAGES_COUNT', payload: unreadMessagesCount });
     });
   }, [isAuthenticated]);
+
+
+  const [expoPushToken, setExpoPushToken] = useState('');
+  const [notification, setNotification] = useState(false);
+  const notificationListener = useRef();
+  const responseListener = useRef();
+
+  useEffect(() => {
+    if(isAuthenticated === false || expoPushToken !== '') return;
+
+    registerForPushNotificationsAsync().then(async token =>{ 
+      setExpoPushToken(token);
+      await registerNotificationToken(token);
+    });
+
+    notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
+      console.log(notification);
+      setNotification(notification);
+    });
+
+    responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
+      console.log(response);
+    });
+    
+
+    return () => {
+      Notifications.removeNotificationSubscription(notificationListener.current);
+      Notifications.removeNotificationSubscription(responseListener.current);
+    };
+  }, [isAuthenticated]);
+
 
   return (
     <Stack.Navigator

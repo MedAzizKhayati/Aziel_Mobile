@@ -68,3 +68,12 @@ export const logout = () => {
 export const getUserById = async (id: string): Promise<any> => {
     return (await axiosInstance.get('/user/' + id)).data;
 }
+
+
+export const registerNotificationToken = async (notificationToken: string): Promise<any> => {
+    return (await axiosInstance.post('/user/notification/register', { notificationToken })).data;
+}
+
+export const getTestNotification = async (): Promise<any> => {
+    return (await axiosInstance.get('/user/notification/test')).data;
+}

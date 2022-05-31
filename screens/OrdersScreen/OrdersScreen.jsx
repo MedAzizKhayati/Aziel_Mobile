@@ -11,11 +11,12 @@ const OrdersScreen = ({ navigation }) => {
   const { authState, authDispatch } = useContext(GlobalContext);
   const colorScheme = useColorScheme();
   const [orders, setOrders] = useState([]);
-  const orderView = () => {
+  const OrderView = () => {
     return (
       <View style={styles.container}>
         <View style={styles.body}>
           <FlatList
+            style={{ width: '100%' }}
             showsVerticalScrollIndicator={false}
             data={orders}
             renderItem={({ item }) => <OrderCard order={item} />}
@@ -31,7 +32,7 @@ const OrdersScreen = ({ navigation }) => {
       .catch(err => ToastAndroid.show(err.response.data.message, ToastAndroid.SHORT));
   }, []);
   if (orders.length > 0) {
-    return orderView()
+    return <OrderView />
   } else {
     return (
       <View style={{ fles: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
