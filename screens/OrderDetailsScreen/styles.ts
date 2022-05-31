@@ -22,15 +22,22 @@ const styles = StyleSheet.create({
         paddingLeft: 20,
         paddingRight: 20
     },
-    btn: {
-        height: 55,
+    imageContainer: {
+        width: '30%',
+        height: 100,
+        padding: 14,
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 40,
-        backgroundColor: 'orange',
-        marginHorizontal: 20,
+        backgroundColor: 'grey',
         borderRadius: 10,
+        marginRight: 22,
     },
+    image: {
+        width: '150%',
+        height: '150%',
+        resizeMode: 'contain',
+        borderRadius: 10,
+    }
 });
 
 export default styles;

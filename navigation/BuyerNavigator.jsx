@@ -5,7 +5,7 @@ import { useContext, useEffect, useState } from "react";
 import Colors from "../constants/Colors";
 import { GlobalContext } from "../context/Provider";
 import useColorScheme from "../hooks/useColorScheme";
-import { HomeScreen, ProfileScreen, SettingsScreen, ServicesScreen, EditProfileScreen, ServiceDetailsScreen, OrderDetailsScreen, MessagesScreen, InboxScreen, OrdersScreen } from "../screens";
+import { HomeScreen, ProfileScreen, SettingsScreen, ServicesScreen, EditProfileScreen, ServiceDetailsScreen, OrderDetailsScreen, MessagesScreen, InboxScreen, OrdersScreen , SuccessScreen} from "../screens";
 import ModalScreen from "../screens/ModalScreen";
 
 const BottomTab = createBottomTabNavigator();
@@ -108,6 +108,15 @@ export default () => {
                     title: 'Messages',
                     tabBarButton: () => null,
                     tabBarStyle: { display: 'none' },
+                }}
+            />
+
+              <BottomTab.Screen
+                name="SuccessScreen"
+                component={SuccessScreen}
+                options={{
+                    title: 'Success',
+                    tabBarButton: () => null,
                 }}
             />
             
