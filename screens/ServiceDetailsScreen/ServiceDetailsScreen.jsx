@@ -2,14 +2,18 @@ import useColorScheme from '../../hooks/useColorScheme';
 import { ScrollView, Text, View } from '../../components/Themed';
 import { TouchableOpacity, ImageBackground } from 'react-native';
 import Colors from '../../constants/Colors';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import styles from './styles';
 import { default as Image } from '../../components/ImageWithFallback';
 import { BASE_URL } from '../../services/api.service';
+import RatingStars from '../../components/RatingStars';
+
 
 const ServiceDetailsScreen = ({ navigation, route }) => {
     const service = route.params.service;
     const colorScheme = useColorScheme();
+     const formatURI = (uri) => {
+        return BASE_URL + (uri?.split('\\').join('/') || '');
+    }
     console.log(service);
     return (
         <ScrollView
@@ -22,21 +26,12 @@ const ServiceDetailsScreen = ({ navigation, route }) => {
                 style={styles.headerImage}
                 source={{ uri: BASE_URL + service.imagePath }}
             />
-            {/* <TouchableOpacity onPress={() => navigation.goBack()}>
-                <MaterialCommunityIcons
-                    name="chevron-left"
-                    style={{
-                        fontSize: 18,
-                        color: 'grey',
-                        padding: 12,
-                        backgroundColor: 'white',
-                        //borderRadius: 12,
-                    }}
-                />
-            </TouchableOpacity> 
-            */}
             <View>
                 <View style={{ marginTop: 20, paddingHorizontal: 20 }}>
+                    <View style={[styles.userInfo]}>
+                        <Image style={styles.userPicture} source={{ uri: formatURI(service.user.profileImage) }} />
+                        <Text style={styles.userName}>{`${service.user.firstName} ${service.user.lastName}`}</Text>
+                    </View>
                     <Text style={{ fontSize: 20, fontWeight: 'bold' }}>{service.title}</Text>
                     <Text
                         style={{
@@ -45,7 +40,7 @@ const ServiceDetailsScreen = ({ navigation, route }) => {
                             color: Colors[colorScheme].tint,
                             marginTop: 5,
                         }}>
-                        IT Domain
+                        {service?.category?.title}
                     </Text>
                     <View
                         style={{
@@ -55,18 +50,15 @@ const ServiceDetailsScreen = ({ navigation, route }) => {
                             alignservices: 'center'
                         }}>
                         <View style={{ flexDirection: 'row', alignservices: 'center' }}>
-                            <View style={{ flexDirection: 'row' }}>
-                                <Icon name="star" size={20} color="#FFA500" />
-                                <Icon name="star" size={20} color="#FFA500" />
-                                <Icon name="star" size={20} color="#FFA500" />
-                                <Icon name="star" size={20} color="#FFA500" />
-                                <Icon name="star" size={20} color="#808080" />
-                            </View>
+                            <RatingStars
+                                rating={service.rating}
+                                size={20}
+                            />
                             <Text style={{ fontWeight: 'bold', fontSize: 18, marginLeft: 5 }}>
                                 {service.rating}
                             </Text>
                         </View>
-                        <Text style={{ fontSize: 13, color: Colors[colorScheme].tint }}>{service.reviews} Reviews</Text>
+                        <Text style={{ fontSize: 13,fontWeight:'bold', color: Colors[colorScheme].tint }}>{service.reviewsCount} Reviews</Text>
                     </View>
                     <View style={{ marginTop: 20 }}>
                         <Text style={{ lineHeight: 20, color: Colors[colorScheme].tint }}>

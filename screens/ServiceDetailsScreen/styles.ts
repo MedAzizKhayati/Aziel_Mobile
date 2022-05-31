@@ -10,6 +10,23 @@ const styles = StyleSheet.create({
         borderBottomLeftRadius: 5,
         overflow: 'hidden',
     },
+    userInfo: {
+        width: '100%',
+        flexDirection: 'row',
+        alignItems: 'center',
+        padding:-5,
+        paddingBottom: 20,
+    },
+    userName:{
+        fontSize: 18,
+        fontWeight:'bold',
+    },
+    userPicture: {
+        width: 50,
+        height: 50,
+        borderRadius: 30,
+        marginRight: 15,
+    },
     firstView: {
         width: '100%',
         paddingTop: 16,
