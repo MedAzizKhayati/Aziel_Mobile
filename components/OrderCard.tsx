@@ -3,8 +3,9 @@ import { StyleSheet, View, Text, TouchableOpacity, Image, Dimensions, useColorSc
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 interface OrderProps {
     order: any;
+    navigation: any;
 }
-const OrderCard = ({ order }: OrderProps) => {
+const OrderCard = ({ order , navigation }: OrderProps) => {
     const colorScheme = useColorScheme();
     const [status, setStatus] = useState(order.status);
     const [statusIcon, setStatusIcon] = useState("progress-clock");
@@ -24,7 +25,7 @@ const OrderCard = ({ order }: OrderProps) => {
     }, [status]);
 
     return (
-        <TouchableOpacity style={styles.container}>
+        <TouchableOpacity style={styles.container} onPress={() => navigation.navigate("DeliveryScreen", {order: order})}>
             <View style={styles.details_container}>
                 <View style={styles.infos}>
                     <Text style={{ fontSize: 22, fontWeight: 'bold' }}>Order ID # {order.id}</Text>

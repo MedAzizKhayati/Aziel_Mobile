@@ -60,7 +60,7 @@ const BottomPopup = ({ onTouchOutside, visible, amount, navigation }: BottomPopu
                     <ScrollView horizontal={true}>
                         <View style={styles.paymentOptions}>
                             <TouchableOpacity
-                                onPress={() => navigation.navigate("SuccessScreen")}
+                                onPress={() => navigation.navigate("SuccessScreen" )}
                                 style={styles.options}
                             >
                                 <MaterialCommunityIcons

@@ -18,7 +18,7 @@ const OrdersScreen = ({ navigation }) => {
           <FlatList
             showsVerticalScrollIndicator={false}
             data={orders}
-            renderItem={({ item }) => <OrderCard order={item} />}
+            renderItem={({ item }) => <OrderCard order={item} navigation={navigation}/>}
             keyExtractor={item => item.id}
           />
         </View>

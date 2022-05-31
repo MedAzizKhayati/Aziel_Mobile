@@ -7,9 +7,10 @@ import useColorScheme from '../../hooks/useColorScheme';
 
 import styles from './styles';
 
-export default function SuccessScreen({ navigation }) {
+export default function SuccessScreen({ navigation,route }) {
   const { authDispatch } = useContext(GlobalContext);
   const colorScheme = useColorScheme();
+  const order = route.params.order;
 
   return (
     <View style={styles.container}>
@@ -36,7 +37,7 @@ export default function SuccessScreen({ navigation }) {
           borderRadius: 10,
           width: 350
         }}  >
-          <Text style={{ fontSize: 18, fontWeight: 'bold' }} onPress={() => navigation.navigate("Orders")}>
+          <Text style={{ fontSize: 18, fontWeight: 'bold' }} onPress={() => navigation.navigate("DeliveryScreen", {order: order})}>
             Done
           </Text>
         </TouchableOpacity>
