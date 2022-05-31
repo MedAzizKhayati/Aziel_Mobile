@@ -1,16 +1,15 @@
 import { useEffect, useState } from "react";
 import { View, Text, ScrollView, TextInput } from "../../components/Themed";
-import Colors from "../../constants/Colors";
 import useColorScheme from "../../hooks/useColorScheme";
 import * as yup from 'yup';
 import { Field, Formik } from 'formik';
 import Toast from 'react-native-toast-message';
-
 import styles from "./styles";
-import { ToastAndroid, TouchableOpacity } from "react-native";
-import { Dropdown } from "react-native-element-dropdown";
+import { TouchableOpacity } from "react-native";
 import { getAllServiceCategories } from "../../services/service_cateogries.service";
 import { createService } from "../../services/services.service";
+import DropdownMenu from "../../components/DropdownMenu";
+import CustomInput from "../../components/AdvancedCustomInput";
 
 
 const serviceValidationSchema = yup.object().shape({
@@ -132,87 +131,5 @@ const CreateServiceScreen = ({ navigation }) => {
         </ScrollView>
     );
 }
-
-const DropdownMenu = (props) => {
-    const colorScheme = useColorScheme();
-    const {
-        field: { name, onBlur, onChange, value },
-        form: { errors, touched, setFieldTouched },
-        ...inputProps
-    } = props;
-
-    const hasError = errors[name] && touched[name];
-
-    const renderItem = (item) => {
-        return (
-            <View style={{ ...styles.item, backgroundColor: Colors[colorScheme].secondaryBackground }}>
-                <Text style={styles.textItem}>{item.title}</Text>
-            </View>
-        );
-    };
-
-    return (
-        <View style={styles.fieldView}>
-            <Text style={{ ...styles.fieldTitle, color: Colors[colorScheme].tint }}>{props.label}</Text>
-            <Dropdown
-                style={[styles.dropdown, { backgroundColor: Colors[colorScheme].secondaryBackground }]}
-                placeholderStyle={[styles.placeholderStyle, { color: Colors[colorScheme].tint }]}
-                selectedTextStyle={[styles.selectedTextStyle, { color: Colors[colorScheme].text }]}
-                containerStyle={[styles.dropdownContainer, { backgroundColor: Colors[colorScheme].secondaryBackground }]}
-                maxHeight={300}
-                labelField="title"
-                valueField="id"
-                placeholder={"Select A " + props.label}
-                searchPlaceholder="Search..."
-                value={value}
-                onChange={item => {
-                    onChange(name)(item.id);
-                }}
-                dropdownPosition="top"
-                renderItem={renderItem}
-                {...inputProps}
-            />
-            {hasError && <Text style={styles.errorText}>{errors[name]}</Text>}
-        </View>
-    )
-}
-
-const CustomInput = (props) => {
-    const colorScheme = useColorScheme();
-    const [focused, setFocused] = useState(false);
-
-    const {
-        field: { name, onBlur, onChange, value },
-        form: { errors, touched, setFieldTouched },
-        ...inputProps
-    } = props;
-
-    const hasError = errors[name] && touched[name];
-
-    return (
-        <View style={styles.fieldView}>
-            <Text style={{ ...styles.fieldTitle, color: Colors[colorScheme].tint }}>{props.title}</Text>
-            <TextInput
-                {...inputProps}
-                placeholderTextColor="#666666"
-                onFocus={() => setFocused(true)}
-                onBlur={() => {
-                    setFocused(false);
-                    setFieldTouched(name)
-                }}
-                onChangeText={(text) => onChange(name)(text)}
-                style={[
-                    styles.fieldInput,
-                    {
-                        color: Colors[colorScheme].text,
-                    },
-                    focused && styles.focused
-                ]}
-            />
-            {hasError && <Text style={styles.errorText}>{errors[name]}</Text>}
-        </View>
-    );
-}
-
 
 export default CreateServiceScreen;

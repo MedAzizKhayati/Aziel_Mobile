@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { TouchableOpacity } from 'react-native';
 import Colors from '../../constants/Colors';
 import { GlobalContext } from '../../context/Provider';
-import { ScrollView, Text, View, TextInput } from '../../components/Themed';
+import { ScrollView, Text, View } from '../../components/Themed';
 import styles from '../OrderDetailsScreen/styles';
 import useColorScheme from '../../hooks/useColorScheme';
 import BottomPopup from '../../components/BottomPopup';

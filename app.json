@@ -36,6 +36,13 @@
         {
           "photosPermission": "The app accesses your photos."
         }
+      ],
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/images/aziel_logo.png",
+          "color": "#ff0000"
+        }
       ]
     ]
   }
