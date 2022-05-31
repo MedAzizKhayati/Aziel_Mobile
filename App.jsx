@@ -9,16 +9,13 @@ import useColorScheme from './hooks/useColorScheme';
 import Navigation from './navigation';
 import Toast from 'react-native-toast-message';
 import * as Notifications from 'expo-notifications';
-import * as Device from 'expo-device';
-import * as Permissions from 'expo-permissions';
-import { Platform } from 'react-native';
 
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
-    shouldShowAlert: true,
-    shouldPlaySound: true,
-    shouldSetBadge: true,
+    shouldShowAlert: false,
+    shouldPlaySound: false,
+    shouldSetBadge: false,
   }),
 });
 

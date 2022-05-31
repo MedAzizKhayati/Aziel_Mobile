@@ -60,18 +60,15 @@ function RootNavigator() {
   useEffect(() => {
     if(isAuthenticated === false || expoPushToken !== '') return;
 
-    registerForPushNotificationsAsync().then(async token =>{ 
-      setExpoPushToken(token);
-      await registerNotificationToken(token);
-    });
+    registerForPushNotificationsAsync().then(setExpoPushToken);
 
     notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
-      console.log(notification);
+      // console.log(notification);
       setNotification(notification);
     });
 
     responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
-      console.log(response);
+      // console.log(response);
     });
     
 

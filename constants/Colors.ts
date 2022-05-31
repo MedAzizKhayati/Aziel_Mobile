@@ -10,6 +10,8 @@ export default {
     tabIconDefault: '#ccc',
     tabIconSelected: tintColorLight,
     btn:'orange',
+    tertiaryBackground: 'grey',
+    borderColor:'#DCDCDC'
   },
   dark: {
     text: '#fff',
@@ -19,5 +21,7 @@ export default {
     tabIconDefault: '#ccc',
     tabIconSelected: tintColorDark,
     btn:'orange',
+    tertiaryBackground: 'grey',
+    borderColor:'#DCDCDC'
   },
 };

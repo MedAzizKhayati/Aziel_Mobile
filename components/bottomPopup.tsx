@@ -1,19 +1,28 @@
 import React, { useContext } from 'react';
-import { Modal, TouchableWithoutFeedback, StyleSheet, ScrollView, TouchableOpacity, } from 'react-native';
+import { Modal, TouchableWithoutFeedback, StyleSheet, ScrollView, TouchableOpacity, Alert, } from 'react-native';
 import Colors from '../constants/Colors';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import useColorScheme from '../hooks/useColorScheme';
 import { GlobalContext } from '../context/Provider';
 import { Text, View } from './Themed';
+import { changeOrderStatus } from '../services/chat.service';
+import { getOrderById } from '../services/orders.service';
+import Toast from 'react-native-toast-message';
+
+
 interface BottomPopupProps {
     onTouchOutside: () => void;
     visible: boolean;
     amount: Float32Array;
-    navigation: any
+    navigation: any,
+    order: any
 }
 
-const BottomPopup = ({ onTouchOutside, visible, amount, navigation }: BottomPopupProps) => {
+const BottomPopup = ({ onTouchOutside, visible, navigation, order }: BottomPopupProps) => {
     const colorScheme = useColorScheme();
+    const { authState: {
+        user
+    } } = useContext(GlobalContext);
 
     const RenderOutsideTouchable = ({ onTouch }: { onTouch: () => void }) => {
         return (
@@ -29,9 +38,36 @@ const BottomPopup = ({ onTouchOutside, visible, amount, navigation }: BottomPopu
         )
     }
 
-    const onSuccess = () => {
+    const onPayForOrder = () => {
         onTouchOutside && onTouchOutside();
-        navigation.navigate('SuccessScreen');
+        Alert.alert(
+            'Payment',
+            'Are you sure you want to pay for this order ?\n' +
+            'Your available balance is ' + user.balance + ' TND.\n' +
+            'You will be left with ' + (user.balance - order.total) + ' TND after this transaction.',
+            [
+                { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
+                {
+                    text: 'OK', onPress: async () => {
+                        onTouchOutside && onTouchOutside();
+                        changeOrderStatus(order.id, 'IN_PROGRESS', '');
+                        setTimeout(
+                            async () => {
+                                order = await getOrderById(order.id);
+                                if (order.status === 'IN_PROGRESS')
+                                    navigation.navigate('SuccessScreen', order );
+                                else
+                                    Toast.show({
+                                        type: 'error',
+                                        text1: 'Unexpected error occured, please try again later!',
+                                    });
+                            }
+                            , 1000);
+
+                    }
+                },
+            ],
+        )
     }
 
     return (
@@ -55,7 +91,7 @@ const BottomPopup = ({ onTouchOutside, visible, amount, navigation }: BottomPopu
                 }}>
                     <View style={styles.paymentView}>
                         <Text darkColor='black' style={{ fontSize: 20, fontWeight: 'bold' }}> Payable Amount</Text>
-                        <Text darkColor='black' style={{ fontSize: 20, fontWeight: 'bold' }}> {amount} TND </Text>
+                        <Text darkColor='black' style={{ fontSize: 20, fontWeight: 'bold' }}> {order.price} TND </Text>
                     </View>
                     <View
                         style={{
@@ -81,7 +117,7 @@ const BottomPopup = ({ onTouchOutside, visible, amount, navigation }: BottomPopu
                             style={[styles.paymentOptions]}
                         >
                             <TouchableOpacity
-                                onPress={onSuccess}
+                                onPress={onPayForOrder}
                                 style={[styles.options]}
                             >
                                 <MaterialCommunityIcons
@@ -97,7 +133,7 @@ const BottomPopup = ({ onTouchOutside, visible, amount, navigation }: BottomPopu
                             style={styles.paymentOptions}
                         >
                             <TouchableOpacity
-                                onPress={onSuccess}
+                                onPress={onPayForOrder}
                                 style={styles.options}
                             >
                                 <MaterialCommunityIcons

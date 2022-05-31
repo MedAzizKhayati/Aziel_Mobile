@@ -10,7 +10,6 @@ import { BASE_URL } from '../../services/api.service';
 const ServiceDetailsScreen = ({ navigation, route }) => {
     const service = route.params.service;
     const colorScheme = useColorScheme();
-    console.log(service);
     return (
         <ScrollView
             showsVerticalScrollIndicator={false}
@@ -22,19 +21,6 @@ const ServiceDetailsScreen = ({ navigation, route }) => {
                 style={styles.headerImage}
                 source={{ uri: BASE_URL + service.imagePath }}
             />
-            {/* <TouchableOpacity onPress={() => navigation.goBack()}>
-                <MaterialCommunityIcons
-                    name="chevron-left"
-                    style={{
-                        fontSize: 18,
-                        color: 'grey',
-                        padding: 12,
-                        backgroundColor: 'white',
-                        //borderRadius: 12,
-                    }}
-                />
-            </TouchableOpacity> 
-            */}
             <View>
                 <View style={{ marginTop: 20, paddingHorizontal: 20 }}>
                     <Text style={{ fontSize: 20, fontWeight: 'bold' }}>{service.title}</Text>

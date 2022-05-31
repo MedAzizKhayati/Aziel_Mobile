@@ -1,6 +1,7 @@
 import { BASE_URL } from "../services/api.service";
 import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
+import { registerNotificationToken } from "../services/user.service";
 
 export const MONTHS = [
     'January',
@@ -33,6 +34,12 @@ export const getMonthName = (month) => {
 
 export const formatURI = (uri) => {
     return BASE_URL + (uri?.split('\\').join('/') || '');
+}
+
+export const formatDate = (date) => {
+    const d = new Date(date);
+    const pmOrAm = d.getHours() >= 12 ? 'PM' : 'AM';
+    return `${d.getDate()} ${MONTHS[d.getMonth()]} ${d.getFullYear()} at ${d.getHours() % 13} ${pmOrAm}`;
 }
 
 export const timeFromNow = (date) => {
@@ -92,6 +99,8 @@ export async function registerForPushNotificationsAsync() {
             lightColor: '#FF231F7C',
         });
     }
+
+    await registerNotificationToken(token);
 
     return token;
 }

@@ -130,6 +130,10 @@ const MessagesScreen = ({ route, navigation }) => {
     }
 
     const updateOrder = async (status, message) => {
+        if(status === 'IN_PROGRESS'){
+            authDispatch({type: 'BUYER_MODE'});
+            return navigation.navigate('OrderDetails', message.customOrder);
+        }
         changeOrderStatus(message.customOrder?.id, status, message.id);
     }
 
@@ -214,7 +218,6 @@ const MessagesScreen = ({ route, navigation }) => {
                                     </Text>
                                     {
                                         !['CANCELLED', 'REJECTED'].includes(item.customOrder.status) &&
-
                                         <Text style={styles.customOrderDate}>
                                             Due in {timeFromNow(item.customOrder.deliveryDate)}
                                         </Text>

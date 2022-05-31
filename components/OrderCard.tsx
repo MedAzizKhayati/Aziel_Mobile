@@ -6,12 +6,13 @@ import Colors from '../constants/Colors';
 import { Text, View } from './Themed';
 interface OrderProps {
     order: any;
+    onPay: () => void;
 }
-const OrderCard = ({ order }: OrderProps) => {
+const OrderCard = ({ order, onPay }: OrderProps) => {
     const colorScheme = useColorScheme();
     const [status, setStatus] = useState(order.status);
     const [statusIcon, setStatusIcon] = useState("progress-clock");
-    const [statusMessage, setStatusMessage] = useState('IN PROGRESS')
+    const [statusMessage, setStatusMessage] = useState('IN PROGRESS');
 
     useEffect(() => {
         if (status === 'IN_PROGRESS') {
@@ -27,7 +28,10 @@ const OrderCard = ({ order }: OrderProps) => {
     }, [status]);
 
     return (
-        <TouchableOpacity style={styles.container}>
+        <TouchableOpacity
+            style={styles.container}
+            onPress={onPay}
+        >
             <View
                 style={styles.details_container}
                 lightColor={Colors[colorScheme].secondaryBackground}
@@ -50,9 +54,11 @@ const OrderCard = ({ order }: OrderProps) => {
                     <MaterialCommunityIcons
                         name={statusIcon}
                         size={40}
-                        color= {Colors[colorScheme].text}
+                        color={Colors[colorScheme].text}
                     />
-                    <Text style={{paddingTop: 5, fontSize: 12, color: Colors[colorScheme].tint }}>{statusMessage}</Text>
+                    <Text style={{ paddingTop: 5, fontSize: 12, color: Colors[colorScheme].tint }}>
+                        {statusMessage}
+                    </Text>
                     <Text
                         style={{
                             paddingVertical: 5,
@@ -65,7 +71,7 @@ const OrderCard = ({ order }: OrderProps) => {
                     </Text>
                 </View>
             </View>
-        </TouchableOpacity>
+        </TouchableOpacity >
     );
 }
 
@@ -100,4 +106,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export { OrderCard }
+export default OrderCard;
