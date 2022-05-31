@@ -2,7 +2,7 @@ import { TokenRefreshRequest, applyAuthTokenInterceptor, setAuthTokens } from 'r
 import axios from 'axios'
 import io from 'socket.io-client';
 
-export const BASE_URL: string = "http://192.168.1.16:3000";
+export const BASE_URL: string = "http://192.168.1.13:3000";
 
 // We'll be using this axios instance across the whole application for fetching the API.
 export const axiosInstance = axios.create({ baseURL: BASE_URL });

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { TouchableOpacity } from 'react-native';
 import Colors from '../../constants/Colors';
 import { GlobalContext } from '../../context/Provider';
@@ -30,7 +30,6 @@ const OrderDetailsScreen = ({ navigation, route }) => {
             style={{
                 width: '100%',
                 height: '100%',
-                backgroundColor: 'white',
                 position: 'relative',
             }}>
             <ScrollView>
@@ -38,23 +37,9 @@ const OrderDetailsScreen = ({ navigation, route }) => {
                     <TouchableOpacity
                         style={styles.serviceContainer}>
                         <View
-                            style={{
-                                width: '30%',
-                                height: 100,
-                                padding: 14,
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                backgroundColor: 'grey',
-                                borderRadius: 10,
-                                marginRight: 22,
-                            }}>
+                            style={styles.imageContainer}>
                             <Image
-                                style={{
-                                    width: '150%',
-                                    height: '150%',
-                                    resizeMode: 'contain',
-                                    borderRadius: 10,
-                                }}
+                                style={styles.image}
                             />
                         </View>
                         <View
@@ -63,7 +48,7 @@ const OrderDetailsScreen = ({ navigation, route }) => {
                                 height: '100%',
                                 justifyContent: 'space-around',
                             }}>
-                            <View style={{}}>
+                            <View >
                                 <Text
                                     style={{
                                         fontSize: 18,
@@ -197,8 +182,16 @@ const OrderDetailsScreen = ({ navigation, route }) => {
             </ScrollView>
 
             <View style={styles.footer}>
-                <TouchableOpacity style={styles.btn} onPress={onShowPopup} >
-                    <Text style={{ color: "black", fontSize: 18, fontWeight: 'bold' }}>
+                <TouchableOpacity style={{
+                    backgroundColor: Colors[colorScheme].btn,
+                    height: 55,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    marginTop: 40,
+                    marginHorizontal: 20,
+                    borderRadius: 10,
+                }} onPress={onShowPopup} >
+                    <Text style={{ fontSize: 18, fontWeight: 'bold' }}>
                         Order Now
                     </Text>
                 </TouchableOpacity>
@@ -206,6 +199,8 @@ const OrderDetailsScreen = ({ navigation, route }) => {
             <BottomPopup
                 onTouchOutside={onClosePopup}
                 visible={isVisible}
+                amount={parseFloat(item.price) + 10}
+                navigation={navigation}
             />
         </View>
     );

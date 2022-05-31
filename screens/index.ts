@@ -32,5 +32,7 @@ export { default as CreateServiceScreen } from "./CreateServiceScreen/CreateServ
 
 export { default as EditServiceScreen } from "./EditServiceScreen/EditServiceScreen";
 
+export { default as SuccessScreen } from "./SuccessScreen/SuccessScreen";
+
 
 
