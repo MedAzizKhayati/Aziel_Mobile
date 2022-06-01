@@ -11,6 +11,7 @@ import UserInformations from '../../components/UserInformations';
 import { getReviewsByService } from '../../services/reviews.service';
 import { getUserById } from '../../services/user.service';
 import SmallReviewCard from '../../components/SmallReviewCard';
+import { set } from 'react-native-reanimated';
 
 
 const ServiceDetailsScreen = ({ navigation, route }) => {
@@ -21,7 +22,6 @@ const ServiceDetailsScreen = ({ navigation, route }) => {
     const limit = 10;
     const [page, setPage] = useState(1);
     const [isListEnd, setIsListEnd] = useState(false);
-    const [userList, setUserList] = useState({});
 
     const formatURI = (uri) => {
         return BASE_URL + (uri?.split('\\').join('/') || '');
@@ -38,9 +38,9 @@ const ServiceDetailsScreen = ({ navigation, route }) => {
     const loadMoreReviews = async () => {
         if (isListEnd) return;
         try {
-            const newReviews = await getReviewsByService(service.id, limit, page + 1);
+            const newReviews = await getReviewsByService(service.id, limit, page);
             setReviews([...reviews, ...newReviews]);
-            setPage(page + 1);
+            setPage(page => page + 1)
             if (newReviews.length < limit)
                 setIsListEnd(true);
         } catch (error) {
@@ -48,29 +48,23 @@ const ServiceDetailsScreen = ({ navigation, route }) => {
         }
     };
 
-    const getUser = async (id) => {
-        if(userList[id]) return;
-        try {
-            const user = await getUserById(id);
-            setUserList(list => ({...list, [id]: user}));
-        } catch (error) {
-            ToastAndroid.show("Error while loading data...", ToastAndroid.SHORT);
-        }
-    };
-
     useEffect(() => {
-        getReviewsByService(service.id, limit, page + 1)
+        const page = 1;
+        getReviewsByService(service.id, limit, page)
             .then(reviews => {
                 setReviews(reviews);
+                setIsListEnd(false);
+                setPage(page + 1);
                 if (reviews.length < limit) setIsListEnd(true);
             })
             .catch(err => {
-                ToastAndroid.show(err.response.data.message, ToastAndroid.SHORT);
-                console.log(err.response.data.message);
+                ToastAndroid.show(err?.response?.data?.message, ToastAndroid.SHORT);
+                console.log(err);
             }
             );
-    }, [service.reviewsCount], []);
+    }, [route.params.service]);
 
+    
     return (
         <ScrollView
             showsVerticalScrollIndicator={false}
@@ -161,14 +155,10 @@ const ServiceDetailsScreen = ({ navigation, route }) => {
                         data={reviews}
                         showsHorizontalScrollIndicator={false}
                         keyExtractor={item => item.id}
-                        renderItem={({ item }) => {
-                            getUser(item.owner.id);
-                            return (
-                                <SmallReviewCard review={item} user={userList[item.owner.id] || {}} />
-                            )
+                        renderItem={({ item }) => 
+                                <SmallReviewCard review={item} user={item.owner} />
                         }
 
-                        }
                         ListEmptyComponent={() =>
                             isListEnd
                             && <Text style={styles?.emptyText}>No Reviews found...</Text>

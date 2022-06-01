@@ -4,7 +4,7 @@ import useColorScheme from '../hooks/useColorScheme';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Text } from './Themed';
 import { useContext, useEffect, useState } from 'react';
-import { useIsFocused } from '@react-navigation/native';
+import { CommonActions, useIsFocused } from '@react-navigation/native';
 import { GlobalContext } from '../context/Provider';
 import Image from '../components/ImageWithFallback'
 import { formatURI } from '../utils/helpers';
@@ -21,6 +21,22 @@ const userInformations = ({ onTouchOutside, visible, onSubmit, navigation, User 
     const colorScheme = useColorScheme();
     const isFocused = useIsFocused();
     const { authState: { user } } = useContext(GlobalContext);
+
+    const chatWithUser = (user: {id : string}) => {
+        onTouchOutside && onTouchOutside();
+        const action = CommonActions.navigate({
+            name: 'Root',
+            params: {
+                screen: 'MessagesScreen',
+                params: {
+                    target: user,
+                },
+            },
+            key: user.id,
+        })
+        navigation.dispatch(action);
+    }
+
 
     return (
         <Modal
@@ -54,13 +70,15 @@ const userInformations = ({ onTouchOutside, visible, onSubmit, navigation, User 
                         </View>
                     </TouchableOpacity >
                     <ScrollView>
-                        <Text darkColor='black' style={{ fontSize: 20, fontWeight: 'bold', paddingLeft: 20 }}> User information</Text>
-                        <Text darkColor='black' style={{paddingHorizontal: 30, fontSize: 15, paddingLeft: 25, marginTop: 20 }}>
+                        <Text style={{ fontSize: 20, fontWeight: 'bold', paddingLeft: 10 }}> User information</Text>
+                        <Text style={{ paddingHorizontal: 10, fontSize: 15, marginTop: 20 }}>
                             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
                         </Text>
                         <View style={styles.overallRating}>
-                            <Text darkColor='black' style={{ flex: 8, fontSize: 20, fontWeight: 'bold', paddingLeft: 20, marginTop: 20 }}> Overall Rating </Text>
-                            <View style={{ marginTop: 28, flex: 2, flexDirection: 'row', backgroundColor: Colors[colorScheme].secondaryBackground }}>
+                            <Text style={{ flex: 8, fontSize: 20, fontWeight: 'bold', paddingHorizontal: 10, marginTop: 20 }}>
+                                Overall Rating
+                            </Text>
+                            <View style={{ marginTop: 20, flex: 2, flexDirection: 'row', backgroundColor: Colors[colorScheme].secondaryBackground }}>
                                 <Ionicons
                                     size={18}
                                     name="star"
@@ -70,8 +88,7 @@ const userInformations = ({ onTouchOutside, visible, onSubmit, navigation, User 
                             </View>
                         </View>
                         <TouchableOpacity style={styles.btn}
-                            onPress={() => navigation.navigate('OrderDetails')
-                            }
+                            onPress={() => chatWithUser(User)}
                         >
                             <Text style={{ color: "black", fontSize: 18, fontWeight: 'bold' }}
                             >
@@ -110,13 +127,12 @@ const styles = StyleSheet.create({
         width: '100%',
         flexDirection: 'row',
         alignItems: 'center',
-        padding: 20,
+        padding: 10,
         paddingBottom: 20,
         marginTop: 20,
     },
     infosContainer: {
         marginTop: -5
-
     },
     userName: {
         fontSize: 18,
@@ -143,9 +159,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: 40,
         backgroundColor: 'orange',
-        marginHorizontal: 20,
+        marginHorizontal: 10,
         borderRadius: 10,
-      },
+        marginBottom: 20
+    },
 });
 
 

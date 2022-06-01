@@ -9,9 +9,11 @@ const AdvancedCustomInput = (props) => {
     const [focused, setFocused] = useState(false);
 
     const {
-        field: { name, onBlur, onChange, value },
+        field: { name, onChange, value },
         form: { errors, touched, setFieldTouched },
         backgroundColor,
+        onFocus,
+        onBlur,
         ...inputProps
     } = props;
 
@@ -28,10 +30,15 @@ const AdvancedCustomInput = (props) => {
             <TextInput
                 {...inputProps}
                 placeholderTextColor="#666666"
-                onFocus={() => setFocused(true)}
+                onFocus={() => {
+                    setFocused(true);
+                    onFocus && onFocus();
+                }}
                 onBlur={() => {
                     setFocused(false);
-                    setFieldTouched(name)
+                    setFieldTouched(name);
+                    onBlur && onBlur();
+
                 }}
                 onChangeText={(text) => onChange(name)(text)}
                 style={[

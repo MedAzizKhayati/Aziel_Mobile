@@ -15,15 +15,23 @@ const OrderCard = ({ order, onPay }: OrderProps) => {
     const [statusMessage, setStatusMessage] = useState('IN PROGRESS');
 
     useEffect(() => {
-        if (status === 'IN_PROGRESS') {
-            setStatusMessage("IN PROGRESS");
-            setStatusIcon("progress-clock");
-        } else if (status === "COMPLETED") {
-            setStatusMessage("DELIVERED");
-            setStatusIcon("done-all");
-        } else if (status === "CANCELLED") {
-            setStatusMessage("CANCELLED");
-            setStatusIcon("cancel");
+        switch (order.status) {
+            case 'IN_PROGRESS':
+                setStatusMessage("IN PROGRESS");
+                setStatusIcon("progress-clock");
+                break;
+            case "COMPLETED":
+            case 'RATED':
+                setStatusMessage("DELIVERED");
+                setStatusIcon("cube-send");
+                break;
+            case "CANCELLED":
+            case 'REJECTED':
+                setStatusMessage("CANCELLED");
+                setStatusIcon("cancel");
+                break;
+            default:
+                break;
         }
     }, [status]);
 
@@ -44,7 +52,7 @@ const OrderCard = ({ order, onPay }: OrderProps) => {
                 >
                     <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Order ID # </Text>
                     <Text style={{ fontSize: 12 }}>{order.id}</Text>
-                    <Text style={{ fontSize: 24, fontWeight: '700', color: 'yellow' }}>{order.total} TND</Text>
+                    <Text style={{ fontSize: 24, fontWeight: '700' }}>{parseFloat(order.total).toFixed(2)} TND</Text>
                 </View>
                 <View
                     style={styles.image_container}
