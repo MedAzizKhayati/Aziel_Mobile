@@ -5,7 +5,7 @@ import { useContext, useEffect, useState } from "react";
 import Colors from "../constants/Colors";
 import { GlobalContext } from "../context/Provider";
 import useColorScheme from "../hooks/useColorScheme";
-import { HomeScreen, ProfileScreen, SettingsScreen, ServicesScreen, EditProfileScreen, ServiceDetailsScreen, OrderDetailsScreen, MessagesScreen, InboxScreen, OrdersScreen , SuccessScreen,DeliveryScreen } from "../screens";
+import { HomeScreen, ProfileScreen, SettingsScreen, ServicesScreen, EditProfileScreen, ServiceDetailsScreen, OrderDetailsScreen, MessagesScreen, InboxScreen, OrdersScreen , SuccessScreen,DeliveryScreen, RatingScreen } from "../screens";
 import ModalScreen from "../screens/ModalScreen";
 
 const BottomTab = createBottomTabNavigator();

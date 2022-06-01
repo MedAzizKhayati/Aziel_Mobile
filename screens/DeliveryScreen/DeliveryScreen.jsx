@@ -9,6 +9,8 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { useIsFocused } from '@react-navigation/native';
 import { formatDate } from '../../utils/helpers';
 import styles from './styles';
+import RatingModal from '../../components/RatingModal';
+
 
 
 const trackOrderStatus = [
@@ -33,7 +35,14 @@ export default function DeliveryScreen({ navigation, route }) {
     const isFocused = useIsFocused();
     const [currentStep, setCurrentStep] = useState(2);
     const [order, setOrder] = useState(route.params);
+    const [isVisible, setIsVisible] = useState(false);
 
+    const onShowPopup = () => {
+        setIsVisible(true);
+    }
+    const onClosePopup = () => {
+        setIsVisible(false);
+    }
 
     useEffect(() => {
         if (!isFocused) return;
@@ -124,23 +133,56 @@ export default function DeliveryScreen({ navigation, route }) {
                 paddingLeft: 10,
                 paddingRight: 10
             }}>
-                <TouchableOpacity style={{
-                    backgroundColor: Colors[colorScheme].btn,
-                    height: 60,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    marginTop: 20,
-                    marginHorizontal: 50,
-                    borderRadius: 10,
-                }} onPress={() => navigation.navigate("Orders")}>
 
-                    <Text
-                        style={{ fontSize: 18, fontWeight: 'bold' }}
-                        darkColor='black'
-                    >
-                        Go Back
-                    </Text>
-                </TouchableOpacity>
+
+                {currentStep != 3
+                    &&
+                    <TouchableOpacity style={{
+                        backgroundColor: Colors[colorScheme].btn,
+                        height: 60,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        marginTop: 20,
+                        marginHorizontal: 50,
+                        borderRadius: 10,
+                    }} onPress={() => navigation.navigate("Orders")}>
+                        <Text
+                            style={{ fontSize: 18, fontWeight: 'bold' }}
+                            darkColor='black'
+                        >
+                            Go Back
+
+                        </Text>
+                    </TouchableOpacity>
+
+                }
+
+                {currentStep == 3
+                    &&
+                    <TouchableOpacity style={{
+                        backgroundColor: Colors[colorScheme].btn,
+                        height: 60,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        marginTop: 20,
+                        marginHorizontal: 50,
+                        borderRadius: 10,
+                    }} onPress={onShowPopup}>
+                        <Text
+                            style={{ fontSize: 18, fontWeight: 'bold' }}
+                            darkColor='black'
+                        >
+                            Rate Me
+
+                        </Text>
+                    </TouchableOpacity>
+
+                }
+                <RatingModal
+                onTouchOutside={onClosePopup}
+                visible={isVisible}
+                navigation={navigation}
+            />
             </View>
         </View>
     )
