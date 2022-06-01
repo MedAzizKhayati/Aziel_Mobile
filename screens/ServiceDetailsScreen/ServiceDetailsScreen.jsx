@@ -15,17 +15,17 @@ const ServiceDetailsScreen = ({ navigation, route }) => {
     const colorScheme = useColorScheme();
     const [isVisible, setIsVisible] = useState(false);
 
-     const formatURI = (uri) => {
+    const formatURI = (uri) => {
         return BASE_URL + (uri?.split('\\').join('/') || '');
     }
-    
+
     const onShowPopup = () => {
         setIsVisible(true);
     }
     const onClosePopup = () => {
         setIsVisible(false);
     }
-    console.log(service);
+    
     return (
         <ScrollView
             showsVerticalScrollIndicator={false}
@@ -69,7 +69,7 @@ const ServiceDetailsScreen = ({ navigation, route }) => {
                                 {service.rating}
                             </Text>
                         </View>
-                        <Text style={{ fontSize: 13,fontWeight:'bold', color: Colors[colorScheme].tint }}>{service.reviewsCount} Reviews</Text>
+                        <Text style={{ fontSize: 13, fontWeight: 'bold', color: Colors[colorScheme].tint }}>{service.reviewsCount} Reviews</Text>
                     </View>
                     <View style={{ marginTop: 20 }}>
                         <Text style={{ lineHeight: 20, color: Colors[colorScheme].tint }}>
@@ -110,11 +110,11 @@ const ServiceDetailsScreen = ({ navigation, route }) => {
                     </Text>
                 </TouchableOpacity>
                 <UserInformations
-                onTouchOutside={onClosePopup}
-                visible={isVisible}
-                navigation={navigation}
-                User={service.user}
-            />
+                    onTouchOutside={onClosePopup}
+                    visible={isVisible}
+                    navigation={navigation}
+                    User={service.user}
+                />
             </View>
         </ScrollView>
     )

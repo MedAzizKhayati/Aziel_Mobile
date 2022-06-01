@@ -130,8 +130,8 @@ const MessagesScreen = ({ route, navigation }) => {
     }
 
     const updateOrder = async (status, message) => {
-        if(status === 'IN_PROGRESS'){
-            authDispatch({type: 'BUYER_MODE'});
+        if (status === 'IN_PROGRESS') {
+            authDispatch({ type: 'BUYER_MODE' });
             return navigation.navigate('OrderDetails', message.customOrder);
         }
         changeOrderStatus(message.customOrder?.id, status, message.id);
@@ -269,7 +269,7 @@ const MessagesScreen = ({ route, navigation }) => {
                                     {
                                         ['COMPLETED', 'RATED'].includes(item.customOrder.status) &&
                                         <OrderButton
-                                            text="Offer Delivered"
+                                            text="Order Delivered"
                                             backgroundColor="green"
                                             disabled={true}
                                         />
