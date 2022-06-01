@@ -14,12 +14,12 @@ const styles = StyleSheet.create({
         width: '100%',
         flexDirection: 'row',
         alignItems: 'center',
-        padding:-5,
+        padding: -5,
         paddingBottom: 20,
     },
-    userName:{
+    userName: {
         fontSize: 18,
-        fontWeight:'bold',
+        fontWeight: 'bold',
     },
     userPicture: {
         width: 50,
@@ -44,8 +44,8 @@ const styles = StyleSheet.create({
         backgroundColor: 'orange',
         marginHorizontal: 20,
         borderRadius: 10,
-      },
-      priceTag: {
+    },
+    priceTag: {
         height: 40,
         alignItems: 'center',
         marginLeft: 40,
@@ -55,8 +55,16 @@ const styles = StyleSheet.create({
         borderTopLeftRadius: 20,
         borderBottomLeftRadius: 20,
         flexDirection: 'row',
-      },
-      
+    },
+    reviewsContainer: {
+        width: '100%',
+        paddingBottom: 100,
+    },
+    emptyText: {
+        fontSize: 20,
+        textAlign: 'center',
+        marginTop: 20,
+    }
 })
 
 export default styles;
